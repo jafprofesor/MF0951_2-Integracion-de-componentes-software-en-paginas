@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Blog News API</title>
+  </head>
+  <body>
+    <h1>Blog News API</h1>
+    <input type="text" id="seleccion" placeholder="Buscar noticias" />
+    <button id="buscar">Buscar</button>
+    <div id="news-list">
+      <!-- News articles will be loaded here -->
+    </div>
+    <script>
+      const seleccion = document.getElementById("seleccion");
+      const buscar = document.getElementById("buscar");
+
+      buscar.addEventListener("click", function () {
+        const query = seleccion.value; // Obtén el valor del input al hacer clic
+        const url =
+          "https://newsapi.org/v2/everything?" +
+          "q=" +
+          encodeURIComponent(query) +
+          "&" +
+          "sortBy=popularity&" +
+          "apiKey=c2c5473631944e5580e1b411bd86ef8d";
+
+        console.log("Value: " + query);
+        console.log("url:" + url);
+
+        let req = new Request(url);
+
+        fetch(req)
+          .then(function (response) {
+            return response.json();
+          })
+          .then(function (data) {
+            let noticias = document.getElementById("news-list");
+            noticias.innerHTML = ""; // Limpia las noticias anteriores
+            let listaArticulos = data.articles;
+            listaArticulos.forEach((articulo) => {
+              let article = document.createElement("article");
+              article.innerHTML = `
+                <h2>${articulo.title}</h2>
+                <p>${articulo.description}</p>
+                <a href="${articulo.url}" target="_blank">Leer más</a>
+              `;
+              noticias.appendChild(article);
+            });
+          })
+          .catch(function (error) {
+            console.error("Error al obtener las noticias:", error);
+          });
+      });
+    </script>
+  </body>
+</html>
