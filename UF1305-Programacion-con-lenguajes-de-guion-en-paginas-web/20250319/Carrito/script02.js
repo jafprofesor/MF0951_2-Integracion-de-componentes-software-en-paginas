@@ -1,6 +1,23 @@
-// script.js
+// Este código implementa un carrito de compras básico en JavaScript:
+//
+// 1. Mantiene un array 'carrito' que almacena los artículos seleccionados
+//
+// 2. Incluye tres funciones principales:
+//    - añadirAlCarrito(): Permite agregar artículos especificando cantidad
+//    - mostrarCarrito(): Muestra un popup con los artículos y el total
+//    - cerrarCarrito(): Oculta el popup del carrito
+//
+// 3. Cada artículo en el carrito tiene:
+//    - id: Identificador único del producto
+//    - cantidad: Número de unidades seleccionadas
+//    - precio: Precio unitario del artículo
+//
+// 4. El código maneja la interfaz visual mediante:
+//    - Manipulación del DOM para mostrar/ocultar elementos
+//    - Creación dinámica de elementos para la lista del carrito
+//    - Cálculo automático de subtotales y total
 let carrito = [];
-
+// Función para añadir un artículo al carrito
 function añadirAlCarrito(id) {
   const cantidad = parseInt(document.getElementById(`cantidad${id}`).value);
   if (cantidad > 0) {
@@ -12,7 +29,7 @@ function añadirAlCarrito(id) {
     alert("Por favor, introduce una cantidad válida.");
   }
 }
-
+// Función para mostrar el carrito
 function mostrarCarrito() {
   const popup = document.getElementById("carritoPopup");
   const listaCarrito = document.getElementById("listaCarrito");
@@ -37,7 +54,7 @@ function mostrarCarrito() {
   // Mostrar el popup
   popup.style.display = "flex";
 }
-
+// Función para cerrar el carrito
 function cerrarCarrito() {
   const popup = document.getElementById("carritoPopup");
   popup.style.display = "none";
