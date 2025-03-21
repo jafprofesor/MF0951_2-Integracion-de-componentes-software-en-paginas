@@ -44,7 +44,7 @@ Características clave:
 
         // localStorage.setItem guarda el dato como clave-valor
         // ('clave', valor) - Aquí usamos 'userInput' como clave
-        localStorage.setItem("userInput", dato);
+        localStorage.setItem("loQueQuieras", dato);
 
         alert("Dato guardado correctamente!");
       }
@@ -52,7 +52,7 @@ Características clave:
       // 2. Cargar datos desde localStorage
       function cargarDato() {
         // localStorage.getItem recupera el valor usando la clave
-        const datoGuardado = localStorage.getItem("userInput");
+        const datoGuardado = localStorage.getItem("loQueQuieras");
 
         // Si no existe el dato, devuelve null
         if (datoGuardado) {
@@ -67,7 +67,8 @@ Características clave:
       // 3. Borrar datos específicos
       function borrarDato() {
         // Elimina el elemento específico del almacenamiento
-        localStorage.removeItem("userInput");
+        localStorage.removeItem("loQueQuieras");
+        // localStorage.clear() borra todo el almacenamiento local
 
         // Actualiza la pantalla
         document.getElementById("mostrador").textContent = "";
@@ -76,7 +77,7 @@ Características clave:
 
       // Bonus: Cargar datos automáticamente al iniciar
       window.onload = function () {
-        const datoInicial = localStorage.getItem("userInput");
+        const datoInicial = localStorage.getItem("loQueQuieras");
         if (datoInicial) {
           document.getElementById(
             "mostrador"

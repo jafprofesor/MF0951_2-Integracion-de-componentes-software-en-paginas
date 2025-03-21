@@ -12,6 +12,9 @@
     <h2>Lista de Personas</h2>
     <button onclick="cargarLista()">Cargar Lista</button>
     <div id="listaPersonas"></div>
+    <div id="listaPersonas2"></div>
+    <h2>Borrar Lista de Personas</h2>
+    <button onclick="borrarLista()">Borrar Lista</button>
 
     <script>
       /*
@@ -23,7 +26,7 @@
 4. Búsqueda eficiente: Los datos mantienen su formato original para procesamiento
 Explicación técnica:
 
-- JSON.stringify() : Convierte objetos JavaScript a cadenas texto para almacenamiento
+- JSON.stringify() : Convierte objetos JavaScript a cadenas de texto para almacenamiento
 - JSON.parse() : Reconstruye los objetos originales desde el texto almacenado
 - Sin JSON solo podríamos almacenar valores simples (strings/números)
 - Con JSON podemos trabajar con estructuras de datos complejas como si estuvieran en memoria*/
@@ -41,13 +44,13 @@ Explicación técnica:
         };
 
         // 3. Cargamos datos existentes o creamos array vacío
-        let personas = JSON.parse(localStorage.getItem("personas")) || [];
+        let personas = JSON.parse(localStorage.getItem("personas")) || []; // JSON.parse convierte a objeto
 
         // 4. Añadimos nueva persona al array
         personas.push(persona);
 
         // 5. Convertimos a JSON y guardamos (necesario para objetos/arrays)
-        localStorage.setItem("personas", JSON.stringify(personas));
+        localStorage.setItem("personas", JSON.stringify(personas)); // JSON.stringify convierte a string
 
         // 6. Actualizamos visualización
         mostrarLista();
@@ -57,11 +60,13 @@ Explicación técnica:
       // Función para cargar y mostrar datos
       function cargarLista() {
         // 7. Obtenemos y parseamos los datos
-        const datosGuardados = JSON.parse(localStorage.getItem("personas"));
+        const datosGuardados = JSON.parse(localStorage.getItem("personas")); // JSON.parse convierte a objeto
         const divLista = document.getElementById("listaPersonas");
-
+        //const divLista2 = document.getElementById("listaPersonas2");
         if (datosGuardados && datosGuardados.length > 0) {
           // 8. Construimos HTML dinámico con los datos
+          //divLista2.innerHTML =
+          //"<h2>Lista de Personas mia</h2><br><ol><li>uno</li><li>dos</li></ol>";
           let html = "<ul>";
           datosGuardados.forEach((persona, index) => {
             html += `
@@ -83,7 +88,10 @@ Explicación técnica:
       function mostrarLista() {
         cargarLista();
       }
-
+      function borrarLista() {
+        localStorage.removeItem("personas");
+        cargarLista();
+      }
       // Cargar lista automáticamente al iniciar
       window.onload = mostrarLista;
     </script>
