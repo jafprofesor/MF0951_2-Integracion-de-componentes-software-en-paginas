@@ -1,0 +1,463 @@
+<!DOCTYPE html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Ejercicios de Validación de Formularios</title>
+    <style>
+      body {
+        font-family: Arial, sans-serif;
+        max-width: 800px;
+        margin: 0 auto;
+        padding: 20px;
+      }
+      h1,
+      h2 {
+        color: #333;
+      }
+      .ejercicio {
+        margin-bottom: 30px;
+        padding: 15px;
+        border: 1px solid #ddd;
+        border-radius: 5px;
+        background-color: #f9f9f9;
+      }
+      .form-group {
+        margin-bottom: 10px;
+      }
+      label {
+        display: block;
+        margin-bottom: 5px;
+        font-weight: bold;
+      }
+      input,
+      select {
+        width: 100%;
+        padding: 8px;
+        border: 1px solid #ccc;
+        border-radius: 4px;
+        box-sizing: border-box;
+      }
+      button {
+        padding: 8px 15px;
+        background-color: #4caf50;
+        color: white;
+        border: none;
+        border-radius: 4px;
+        cursor: pointer;
+      }
+      button:hover {
+        background-color: #45a049;
+      }
+      .resultado {
+        margin-top: 10px;
+        padding: 10px;
+        border-radius: 4px;
+        display: none;
+      }
+      .valido {
+        background-color: #dff0d8;
+        color: #3c763d;
+        border: 1px solid #d6e9c6;
+      }
+      .invalido {
+        background-color: #f2dede;
+        color: #a94442;
+        border: 1px solid #ebccd1;
+      }
+      .campo-error {
+        border-color: red;
+      }
+    </style>
+  </head>
+  <body>
+    <h1>Ejercicios de Validación de Formularios</h1>
+
+    <div class="ejercicio">
+      <h2>Ejercicio 1: Validar Campo Vacío</h2>
+      <div class="form-group">
+        <label for="campo-texto">Texto:</label>
+        <input type="text" id="campo-texto" placeholder="Ingrese algún texto" />
+      </div>
+      <button
+        onclick="mostrarResultado(1, validarCampoVacio(document.getElementById('campo-texto').value))"
+      >
+        Validar
+      </button>
+      <div id="resultado-1" class="resultado"></div>
+    </div>
+
+    <div class="ejercicio">
+      <h2>Ejercicio 2: Validar Edad</h2>
+      <div class="form-group">
+        <label for="campo-edad">Edad (18-99):</label>
+        <input type="number" id="campo-edad" placeholder="Ingrese su edad" />
+      </div>
+      <button
+        onclick="mostrarResultado(2, validarEdad(document.getElementById('campo-edad').value))"
+      >
+        Validar
+      </button>
+      <div id="resultado-2" class="resultado"></div>
+    </div>
+
+    <div class="ejercicio">
+      <h2>Ejercicio 3: Validar Email</h2>
+      <div class="form-group">
+        <label for="campo-email">Email:</label>
+        <input
+          type="email"
+          id="campo-email"
+          placeholder="ejemplo@dominio.com"
+        />
+      </div>
+      <button
+        onclick="mostrarResultado(3, validarEmail(document.getElementById('campo-email').value))"
+      >
+        Validar
+      </button>
+      <div id="resultado-3" class="resultado"></div>
+    </div>
+
+    <div class="ejercicio">
+      <h2>Ejercicio 4: Validar Longitud de Contraseña</h2>
+      <div class="form-group">
+        <label for="campo-password">Contraseña (mínimo 8 caracteres):</label>
+        <input
+          type="password"
+          id="campo-password"
+          placeholder="Ingrese contraseña"
+        />
+      </div>
+      <button
+        onclick="mostrarResultado(4, validarLongitudContrasena(document.getElementById('campo-password').value))"
+      >
+        Validar
+      </button>
+      <div id="resultado-4" class="resultado"></div>
+    </div>
+
+    <div class="ejercicio">
+      <h2>Ejercicio 5: Validar Coincidencia de Contraseñas</h2>
+      <div class="form-group">
+        <label for="campo-password1">Contraseña:</label>
+        <input
+          type="password"
+          id="campo-password1"
+          placeholder="Ingrese contraseña"
+        />
+      </div>
+      <div class="form-group">
+        <label for="campo-password2">Repetir Contraseña:</label>
+        <input
+          type="password"
+          id="campo-password2"
+          placeholder="Repita la contraseña"
+        />
+      </div>
+      <button
+        onclick="mostrarResultado(5, validarCoincidencia(document.getElementById('campo-password1').value, document.getElementById('campo-password2').value))"
+      >
+        Validar
+      </button>
+      <div id="resultado-5" class="resultado"></div>
+    </div>
+
+    <div class="ejercicio">
+      <h2>Ejercicio 6: Validar Teléfono</h2>
+      <div class="form-group">
+        <label for="campo-telefono">Teléfono (9 dígitos):</label>
+        <input type="tel" id="campo-telefono" placeholder="Ej: 123456789" />
+      </div>
+      <button
+        onclick="mostrarResultado(6, validarTelefono(document.getElementById('campo-telefono').value))"
+      >
+        Validar
+      </button>
+      <div id="resultado-6" class="resultado"></div>
+    </div>
+
+    <div class="ejercicio">
+      <h2>Ejercicio 7: Validar Nombre</h2>
+      <div class="form-group">
+        <label for="campo-nombre">Nombre (solo letras y espacios):</label>
+        <input type="text" id="campo-nombre" placeholder="Ingrese su nombre" />
+      </div>
+      <button
+        onclick="mostrarResultado(7, validarNombre(document.getElementById('campo-nombre').value))"
+      >
+        Validar
+      </button>
+      <div id="resultado-7" class="resultado"></div>
+    </div>
+
+    <div class="ejercicio">
+      <h2>Ejercicio 8: Validación en Tiempo Real</h2>
+      <div class="form-group">
+        <label for="campo">Campo (no puede estar vacío):</label>
+        <input type="text" id="campo" placeholder="Escriba algo..." />
+      </div>
+      <div id="resultado-8" class="resultado">
+        El campo cambiará a rojo si está vacío
+      </div>
+    </div>
+
+    <div class="ejercicio">
+      <h2>Ejercicio 9: Validar Código Postal</h2>
+      <div class="form-group">
+        <label for="campo-cp">Código Postal (5 dígitos):</label>
+        <input type="text" id="campo-cp" placeholder="Ej: 28001" />
+      </div>
+      <button
+        onclick="mostrarResultado(9, validarCodigoPostal(document.getElementById('campo-cp').value))"
+      >
+        Validar
+      </button>
+      <div id="resultado-9" class="resultado"></div>
+    </div>
+
+    <div class="ejercicio">
+      <h2>Ejercicio 10: Validar Múltiples Campos</h2>
+      <div class="form-group">
+        <label for="campo-nombre-multi">Nombre:</label>
+        <input
+          type="text"
+          id="campo-nombre-multi"
+          placeholder="Ingrese su nombre"
+        />
+      </div>
+      <div class="form-group">
+        <label for="campo-edad-multi">Edad (1-120):</label>
+        <input
+          type="number"
+          id="campo-edad-multi"
+          placeholder="Ingrese su edad"
+        />
+      </div>
+      <div class="form-group">
+        <label for="campo-email-multi">Email:</label>
+        <input
+          type="email"
+          id="campo-email-multi"
+          placeholder="ejemplo@dominio.com"
+        />
+      </div>
+      <button onclick="validarMultiples()">Validar</button>
+      <div id="resultado-10" class="resultado"></div>
+    </div>
+
+    <div class="ejercicio">
+      <h2>Ejercicio 11: Validar URL</h2>
+      <div class="form-group">
+        <label for="campo-url">URL:</label>
+        <input type="url" id="campo-url" placeholder="https://ejemplo.com" />
+      </div>
+      <button
+        onclick="mostrarResultado(11, validarURL(document.getElementById('campo-url').value))"
+      >
+        Validar
+      </button>
+      <div id="resultado-11" class="resultado"></div>
+    </div>
+
+    <div class="ejercicio">
+      <h2>Ejercicio 12: Validar Entero Positivo</h2>
+      <div class="form-group">
+        <label for="campo-entero">Número Entero Positivo:</label>
+        <input type="number" id="campo-entero" placeholder="Ej: 42" />
+      </div>
+      <button
+        onclick="mostrarResultado(12, validarEnteroPositivo(document.getElementById('campo-entero').value))"
+      >
+        Validar
+      </button>
+      <div id="resultado-12" class="resultado"></div>
+    </div>
+
+    <div class="ejercicio">
+      <h2>Ejercicio 13: Validar Formato de Fecha</h2>
+      <div class="form-group">
+        <label for="campo-fecha">Fecha (DD/MM/AAAA):</label>
+        <input type="text" id="campo-fecha" placeholder="Ej: 31/12/2023" />
+      </div>
+      <button
+        onclick="mostrarResultado(13, validarFecha(document.getElementById('campo-fecha').value))"
+      >
+        Validar
+      </button>
+      <div id="resultado-13" class="resultado"></div>
+    </div>
+
+    <div class="ejercicio">
+      <h2>Ejercicio 14: Validar Selección</h2>
+      <div class="form-group">
+        <label for="campo-seleccion">Seleccione una opción:</label>
+        <select id="campo-seleccion">
+          <option value="default">-- Seleccione --</option>
+          <option value="opcion1">Opción 1</option>
+          <option value="opcion2">Opción 2</option>
+          <option value="opcion3">Opción 3</option>
+        </select>
+      </div>
+      <button
+        onclick="mostrarResultado(14, validarSeleccion(document.getElementById('campo-seleccion').value, 'default'))"
+      >
+        Validar
+      </button>
+      <div id="resultado-14" class="resultado"></div>
+    </div>
+
+    <div class="ejercicio">
+      <h2>Ejercicio 15: Validar Sin Espacios</h2>
+      <div class="form-group">
+        <label for="campo-sin-espacios">Texto sin espacios:</label>
+        <input type="text" id="campo-sin-espacios" placeholder="SinEspacios" />
+      </div>
+      <button
+        onclick="mostrarResultado(15, validarSinEspacios(document.getElementById('campo-sin-espacios').value))"
+      >
+        Validar
+      </button>
+      <div id="resultado-15" class="resultado"></div>
+    </div>
+
+    <div class="ejercicio">
+      <h2>Ejercicio 16: Validar Número Decimal</h2>
+      <div class="form-group">
+        <label for="campo-decimal">Número con hasta 2 decimales:</label>
+        <input type="text" id="campo-decimal" placeholder="Ej: 123.45" />
+      </div>
+      <button
+        onclick="mostrarResultado(16, validarNumeroDecimal(document.getElementById('campo-decimal').value))"
+      >
+        Validar
+      </button>
+      <div id="resultado-16" class="resultado"></div>
+    </div>
+
+    <div class="ejercicio">
+      <h2>Ejercicio 17: Validar Nombre de Usuario</h2>
+      <div class="form-group">
+        <label for="campo-usuario"
+          >Nombre de usuario (solo letras y números):</label
+        >
+        <input type="text" id="campo-usuario" placeholder="Ej: usuario123" />
+      </div>
+      <button
+        onclick="mostrarResultado(17, validarUsuario(document.getElementById('campo-usuario').value))"
+      >
+        Validar
+      </button>
+      <div id="resultado-17" class="resultado"></div>
+    </div>
+
+    <div class="ejercicio">
+      <h2>Ejercicio 18: Validar Mayúscula</h2>
+      <div class="form-group">
+        <label for="campo-mayuscula">Texto con al menos una mayúscula:</label>
+        <input type="text" id="campo-mayuscula" placeholder="Ej: Texto" />
+      </div>
+      <button
+        onclick="mostrarResultado(18, contieneMayuscula(document.getElementById('campo-mayuscula').value))"
+      >
+        Validar
+      </button>
+      <div id="resultado-18" class="resultado"></div>
+    </div>
+
+    <div class="ejercicio">
+      <h2>Ejercicio 19: Validar DNI</h2>
+      <div class="form-group">
+        <label for="campo-dni">DNI (8 dígitos + letra):</label>
+        <input type="text" id="campo-dni" placeholder="Ej: 12345678Z" />
+      </div>
+      <button
+        onclick="mostrarResultado(19, validarDNI(document.getElementById('campo-dni').value))"
+      >
+        Validar
+      </button>
+      <div id="resultado-19" class="resultado"></div>
+    </div>
+
+    <div class="ejercicio">
+      <h2>Ejercicio 20: Validar Checkbox Obligatorio</h2>
+      <div class="form-group">
+        <label>
+          <input type="checkbox" id="campo-checkbox" /> Acepto los términos y
+          condiciones
+        </label>
+      </div>
+      <button
+        onclick="mostrarResultado(20, validarCheckboxObligatorio(document.getElementById('campo-checkbox')))"
+      >
+        Validar
+      </button>
+      <div id="resultado-20" class="resultado"></div>
+    </div>
+
+    <div class="ejercicio">
+      <h2>Ejercicio 21: Validar Múltiplo de 3</h2>
+      <div class="form-group">
+        <label for="campo-multiplo">Número (múltiplo de 3):</label>
+        <input type="number" id="campo-multiplo" placeholder="Ej: 3, 6, 9..." />
+      </div>
+      <button
+        onclick="mostrarResultado(21, esMultiploDeTres(Number(document.getElementById('campo-multiplo').value)))"
+      >
+        Validar
+      </button>
+      <div id="resultado-21" class="resultado"></div>
+    </div>
+
+    <div class="ejercicio">
+      <h2>Ejercicio 22: Validar Longitud de Cadena</h2>
+      <div class="form-group">
+        <label for="campo-longitud">Texto (entre 5 y 10 caracteres):</label>
+        <input
+          type="text"
+          id="campo-longitud"
+          placeholder="Entre 5 y 10 caracteres"
+        />
+      </div>
+      <button
+        onclick="mostrarResultado(22, validarLongitudCadena(document.getElementById('campo-longitud').value, 5, 10))"
+      >
+        Validar
+      </button>
+      <div id="resultado-22" class="resultado"></div>
+    </div>
+
+    <!-- Primero cargamos el archivo validaciones.js -->
+    <script src="validaciones.js"></script>
+
+    <!-- Luego añadimos solo las funciones auxiliares necesarias -->
+    <script>
+      // Función para mostrar el resultado de la validación
+      function mostrarResultado(id, esValido, mensaje) {
+        const resultado = document.getElementById(`resultado-${id}`);
+        resultado.textContent = mensaje || (esValido ? "Válido" : "Inválido");
+        resultado.className = `resultado ${esValido ? "valido" : "invalido"}`;
+        resultado.style.display = "block";
+      }
+
+      // Función especial para el ejercicio 10 (validación múltiple)
+      function validarMultiples() {
+        const nombre = document.getElementById("campo-nombre-multi").value;
+        const edad = document.getElementById("campo-edad-multi").value;
+        const email = document.getElementById("campo-email-multi").value;
+        const errores = validarFormulario(nombre, edad, email);
+
+        if (errores.length === 0) {
+          mostrarResultado(10, true, "Todos los campos son válidos");
+        } else {
+          mostrarResultado(10, false, errores.join(", "));
+        }
+      }
+
+      // Asegurarse de que el resultado del ejercicio 8 sea visible
+      document.addEventListener("DOMContentLoaded", function () {
+        document.getElementById("resultado-8").style.display = "block";
+      });
+    </script>
+  </body>
+</html>
