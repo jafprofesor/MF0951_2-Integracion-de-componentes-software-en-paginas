@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Panel de Control</title>
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <div class="container panel-container">
+      <div id="panel-header">
+        <h1>Panel de Control</h1>
+        <button id="btn-logout" class="btn-logout">Cerrar Sesión</button>
+      </div>
+
+      <div id="panel-content">
+        <div class="user-info">
+          <h2>Información del Usuario</h2>
+          <div id="user-details">
+            <p><strong>Cargando...</strong></p>
+          </div>
+        </div>
+
+        <div class="panel-section">
+          <h2>Contenido Protegido</h2>
+          <p>Este contenido solo es visible para usuarios autenticados.</p>
+          <p>
+            Has iniciado sesión correctamente y tienes acceso a esta área
+            protegida.
+          </p>
+        </div>
+      </div>
+
+      <div id="spinner" class="spinner"></div>
+    </div>
+
+    <script src="panel.js"></script>
+  </body>
+</html>
