@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Usuarios Registrados</title>
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <div class="container usuarios-container">
+      <h1>Usuarios Registrados</h1>
+      <p class="descripcion">Lista de usuarios almacenados en MongoDB</p>
+
+      <div id="spinner" class="spinner"></div>
+
+      <div id="lista-usuarios" class="lista-usuarios">
+        <p class="cargando">Cargando usuarios...</p>
+      </div>
+
+      <div class="enlaces">
+        <a href="/" class="enlace">Volver al formulario de registro</a>
+      </div>
+    </div>
+
+    <script src="usuarios.js"></script>
+  </body>
+</html>
