@@ -1,0 +1,260 @@
+<!DOCTYPE html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Formateo de Fechas - Cleave.js</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/cleave.js/1.6.0/cleave.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/cleave.js/1.6.0/addons/cleave-phone.i18n.js"></script>
+    <style>
+      body {
+        font-family: Arial, sans-serif;
+        max-width: 800px;
+        margin: 0 auto;
+        padding: 20px;
+        background: #f5f5f5;
+      }
+      .container {
+        background: white;
+        padding: 20px;
+        border-radius: 10px;
+        box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+      }
+      .form-group {
+        margin-bottom: 20px;
+      }
+      label {
+        display: block;
+        margin-bottom: 5px;
+        color: #333;
+      }
+      input {
+        width: 100%;
+        padding: 10px;
+        border: 1px solid #ddd;
+        border-radius: 5px;
+        font-size: 16px;
+        margin-bottom: 5px;
+      }
+      input:focus {
+        outline: none;
+        border-color: #4caf50;
+        box-shadow: 0 0 5px rgba(76, 175, 80, 0.3);
+      }
+      .format-selector {
+        margin-bottom: 20px;
+      }
+      select {
+        width: 100%;
+        padding: 10px;
+        border: 1px solid #ddd;
+        border-radius: 5px;
+        font-size: 16px;
+        margin-bottom: 10px;
+      }
+      .hint {
+        font-size: 0.8em;
+        color: #666;
+        margin-top: 5px;
+      }
+      .validation-message {
+        color: #d32f2f;
+        font-size: 0.8em;
+        margin-top: 5px;
+        min-height: 1em;
+      }
+      .success-message {
+        color: #4caf50;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <h1>Formateo de Fechas Internacional</h1>
+
+      <div class="format-selector">
+        <label for="dateFormat">Seleccionar Formato:</label>
+        <select id="dateFormat" onchange="updateDateFormat()">
+          <option value="es">España (DD/MM/YYYY)</option>
+          <option value="us">Estados Unidos (MM/DD/YYYY)</option>
+          <option value="iso">ISO (YYYY-MM-DD)</option>
+          <option value="custom">Personalizado (DD.MM.YYYY)</option>
+        </select>
+      </div>
+
+      <div class="form-group">
+        <label for="date">Fecha:</label>
+        <input type="text" id="date" placeholder="Ingrese la fecha" />
+        <div class="hint" id="dateHint">Formato: DD/MM/YYYY</div>
+        <div class="validation-message" id="dateValidation"></div>
+      </div>
+
+      <div class="form-group">
+        <label for="time">Hora:</label>
+        <input type="text" id="time" placeholder="Ingrese la hora (24h)" />
+        <div class="hint">Formato: HH:MM</div>
+        <div class="validation-message" id="timeValidation"></div>
+      </div>
+
+      <div class="form-group">
+        <label for="datetime">Fecha y Hora:</label>
+        <input type="text" id="datetime" placeholder="Fecha y hora completa" />
+        <div class="hint" id="datetimeHint">Formato: DD/MM/YYYY HH:MM</div>
+        <div class="validation-message" id="datetimeValidation"></div>
+      </div>
+    </div>
+
+    <script>
+      let dateFormats = {
+        es: {
+          format: "dd/mm/yyyy",
+          hint: "Formato: DD/MM/YYYY",
+          delimiter: "/",
+        },
+        us: {
+          format: "mm/dd/yyyy",
+          hint: "Formato: MM/DD/YYYY",
+          delimiter: "/",
+        },
+        iso: {
+          format: "yyyy-mm-dd",
+          hint: "Formato: YYYY-MM-DD",
+          delimiter: "-",
+        },
+        custom: {
+          format: "dd.mm.yyyy",
+          hint: "Formato: DD.MM.YYYY",
+          delimiter: ".",
+        },
+      };
+
+      let currentFormat = "es";
+      let dateInput, timeInput, datetimeInput;
+
+      function initializeCleave() {
+        // Inicializar input de fecha
+        dateInput = new Cleave("#date", {
+          date: true,
+          delimiter: dateFormats[currentFormat].delimiter,
+          datePattern: ["d", "m", "Y"],
+        });
+
+        // Inicializar input de hora
+        timeInput = new Cleave("#time", {
+          time: true,
+          timePattern: ["h", "m"],
+        });
+
+        // Inicializar input de fecha y hora
+        datetimeInput = new Cleave("#datetime", {
+          delimiters: [dateFormats[currentFormat].delimiter, " ", ":"],
+          blocks: [2, 2, 4, 2, 2],
+          numericOnly: true,
+        });
+      }
+
+      function updateDateFormat() {
+        currentFormat = document.getElementById("dateFormat").value;
+        const format = dateFormats[currentFormat];
+
+        // Actualizar hints
+        document.getElementById("dateHint").textContent = format.hint;
+        document.getElementById("datetimeHint").textContent =
+          format.hint + " HH:MM";
+
+        // Reinicializar inputs
+        dateInput.destroy();
+        datetimeInput.destroy();
+        initializeCleave();
+
+        // Limpiar inputs
+        document.getElementById("date").value = "";
+        document.getElementById("datetime").value = "";
+        clearValidation();
+      }
+
+      function validateDate(dateStr) {
+        if (!dateStr) return false;
+
+        const parts = dateStr.split(dateFormats[currentFormat].delimiter);
+        if (parts.length !== 3) return false;
+
+        let day, month, year;
+        switch (currentFormat) {
+          case "us":
+            [month, day, year] = parts;
+            break;
+          case "iso":
+            [year, month, day] = parts;
+            break;
+          default:
+            [day, month, year] = parts;
+        }
+
+        const date = new Date(year, month - 1, day);
+        return (
+          date.getFullYear() == year &&
+          date.getMonth() == month - 1 &&
+          date.getDate() == day
+        );
+      }
+
+      function validateTime(timeStr) {
+        if (!timeStr) return false;
+        const [hours, minutes] = timeStr.split(":");
+        return hours >= 0 && hours < 24 && minutes >= 0 && minutes < 60;
+      }
+
+      function showValidation(elementId, isValid, message) {
+        const element = document.getElementById(elementId);
+        element.textContent = message;
+        element.className =
+          "validation-message " + (isValid ? "success-message" : "");
+      }
+
+      function clearValidation() {
+        ["dateValidation", "timeValidation", "datetimeValidation"].forEach(
+          (id) => {
+            document.getElementById(id).textContent = "";
+          }
+        );
+      }
+
+      // Inicializar Cleave.js
+      initializeCleave();
+
+      // Añadir validaciones en tiempo real
+      document.getElementById("date").addEventListener("input", function (e) {
+        const isValid = validateDate(e.target.value);
+        showValidation(
+          "dateValidation",
+          isValid,
+          isValid ? "Fecha válida" : "Fecha inválida"
+        );
+      });
+
+      document.getElementById("time").addEventListener("input", function (e) {
+        const isValid = validateTime(e.target.value);
+        showValidation(
+          "timeValidation",
+          isValid,
+          isValid ? "Hora válida" : "Hora inválida"
+        );
+      });
+
+      document
+        .getElementById("datetime")
+        .addEventListener("input", function (e) {
+          const [date, time] = e.target.value.split(" ");
+          const isValidDate = validateDate(date);
+          const isValidTime = validateTime(time);
+          const isValid = isValidDate && isValidTime;
+          showValidation(
+            "datetimeValidation",
+            isValid,
+            isValid ? "Fecha y hora válidas" : "Fecha u hora inválidas"
+          );
+        });
+    </script>
+  </body>
+</html>

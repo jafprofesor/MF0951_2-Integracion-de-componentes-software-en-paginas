@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Ejercicio 18 - Gráfico circular con Chart.js</title>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <style>
+      body {
+        font-family: Arial, sans-serif;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        height: 100vh;
+        margin: 0;
+      }
+
+      .chart-container {
+        width: 80%;
+        max-width: 500px;
+        margin: 20px;
+      }
+
+      button {
+        padding: 10px 20px;
+        margin: 5px;
+        cursor: pointer;
+      }
+    </style>
+  </head>
+  <body>
+    <h1>Gráfico circular con Chart.js</h1>
+
+    <div class="chart-container">
+      <canvas id="pieChart"></canvas>
+    </div>
+
+    <div>
+      <button id="updateBtn">Actualizar Datos</button>
+    </div>
+
+    <script>
+      const ctx = document.getElementById("pieChart").getContext("2d");
+      const updateBtn = document.getElementById("updateBtn");
+
+      const data = {
+        labels: ["Red", "Blue", "Yellow", "Green", "Purple"],
+        datasets: [
+          {
+            data: [12, 19, 3, 5, 2],
+            backgroundColor: [
+              "rgba(255, 99, 132, 0.7)",
+              "rgba(54, 162, 235, 0.7)",
+              "rgba(255, 206, 86, 0.7)",
+              "rgba(75, 192, 192, 0.7)",
+              "rgba(153, 102, 255, 0.7)",
+            ],
+            borderColor: [
+              "rgba(255, 99, 132, 1)",
+              "rgba(54, 162, 235, 1)",
+              "rgba(255, 206, 86, 1)",
+              "rgba(75, 192, 192, 1)",
+              "rgba(153, 102, 255, 1)",
+            ],
+            borderWidth: 1,
+          },
+        ],
+      };
+
+      const pieChart = new Chart(ctx, {
+        type: "pie",
+        data: data,
+        options: {
+          responsive: true,
+          plugins: {
+            legend: {
+              position: "top",
+            },
+            title: {
+              display: true,
+              text: "Distribución de colores",
+            },
+          },
+        },
+      });
+
+      updateBtn.addEventListener("click", () => {
+        const newData = pieChart.data.datasets[0].data.map(
+          () => Math.floor(Math.random() * 20) + 1
+        );
+        pieChart.data.datasets[0].data = newData;
+        pieChart.update();
+      });
+    </script>
+  </body>
+</html>

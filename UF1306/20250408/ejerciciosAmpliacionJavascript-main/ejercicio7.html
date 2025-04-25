@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Ejercicio 7 - Timeline avanzado con GSAP</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.11.4/gsap.min.js"></script>
+    <style>
+      body {
+        font-family: Arial, sans-serif;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        min-height: 100vh;
+        margin: 0;
+        padding: 20px;
+      }
+
+      .box {
+        width: 100px;
+        height: 100px;
+        background-color: #ff5722;
+        margin: 20px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        color: white;
+        font-weight: bold;
+      }
+
+      button {
+        padding: 10px 20px;
+        margin: 5px;
+        cursor: pointer;
+      }
+    </style>
+  </head>
+  <body>
+    <h1>Timeline avanzado con GSAP</h1>
+
+    <div class="box" id="box1">1</div>
+    <div class="box" id="box2">2</div>
+    <div class="box" id="box3">3</div>
+
+    <div>
+      <button id="startBtn">Iniciar</button>
+      <button id="resetBtn">Reiniciar</button>
+    </div>
+
+    <script>
+      const box1 = document.getElementById("box1");
+      const box2 = document.getElementById("box2");
+      const box3 = document.getElementById("box3");
+      const startBtn = document.getElementById("startBtn");
+      const resetBtn = document.getElementById("resetBtn");
+
+      const tl = gsap.timeline();
+
+      startBtn.addEventListener("click", () => {
+        tl.play();
+
+        tl.to(box1, {
+          duration: 1,
+          x: 200,
+          y: 100,
+          rotation: 360,
+          backgroundColor: "#2196F3",
+        })
+          .to(
+            box2,
+            { duration: 0.5,
+              y: 100,
+              scale: 1.5, 
+              backgroundColor: "#9C27B0" 
+            },
+            "-=0.5"
+          )
+          .to(
+            box3,
+            {
+              duration: 1.5,
+              x: -200,
+              y: -50,
+              rotation: -180,
+              backgroundColor: "#009688",
+            },
+            "+=0.5"
+          );
+      });
+
+      resetBtn.addEventListener("click", () => {
+        tl.seek(0);
+        tl.pause();
+
+        gsap.set([box1, box2, box3], {
+          x: 0,
+          y: 0,
+          rotation: 0,
+          scale: 1,
+          backgroundColor: "#FF5722",
+        });
+      });
+    </script>
+  </body>
+</html>

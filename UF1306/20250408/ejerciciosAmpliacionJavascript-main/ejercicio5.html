@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Ejercicio 5 - Animación básica con GSAP</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.11.4/gsap.min.js"></script>
+    <style>
+      body {
+        font-family: Arial, sans-serif;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        height: 100vh;
+        margin: 0;
+      }
+
+      .box {
+        width: 100px;
+        height: 100px;
+        background-color: #4caf50;
+        margin: 20px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        color: white;
+        font-weight: bold;
+      }
+
+      button {
+        padding: 10px 20px;
+        margin: 5px;
+        cursor: pointer;
+      }
+    </style>
+  </head>
+  <body>
+    <h1>Animación básica con GSAP</h1>
+
+    <div class="box">Anímame</div>
+
+    <div>
+      <button id="animateBtn">Animar</button>
+      <button id="resetBtn">Reiniciar</button>
+    </div>
+
+    <script>
+      const box = document.querySelector(".box");
+      const animateBtn = document.getElementById("animateBtn");
+      const resetBtn = document.getElementById("resetBtn");
+
+      animateBtn.addEventListener("click", () => {
+        gsap.to(box, {
+          duration: 1,
+          x: 200,
+          rotation: 360,
+          backgroundColor: "#2196F3",
+          ease: "power2.out",
+        });
+      });
+
+      resetBtn.addEventListener("click", () => {
+        gsap.to(box, {
+          duration: 0.5,
+          x: 0,
+          rotation: 0,
+          backgroundColor: "#4CAF50",
+        });
+      });
+    </script>
+  </body>
+</html>

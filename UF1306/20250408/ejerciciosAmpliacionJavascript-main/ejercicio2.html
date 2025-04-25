@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Ejercicio 2 - Canvas</title>
+    <style>
+      body {
+        font-family: Arial, sans-serif;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        height: 100vh;
+        margin: 0;
+      }
+      canvas {
+        border: 1px solid #000;
+        margin: 20px;
+      }
+    </style>
+  </head>
+  <body>
+    <h1>Dibujo en Canvas</h1>
+    <canvas id="myCanvas" width="400" height="400"></canvas>
+    <button id="pirata">Pulsa y veras...</button>
+
+    <script>
+      const canvas = document.getElementById("myCanvas");
+      const pirata = document.getElementById("pirata");
+      const ctx = canvas.getContext("2d");
+      let abierto = true;
+      ctx.beginPath();
+      ctx.arc(100, 100, 50, 0, Math.PI * 2);
+      ctx.fillStyle = "blue";
+      ctx.fill();
+      pirata.addEventListener("click", () => {
+        if (!abierto) {
+          ctx.clearRect(0, 0, 200, 200);
+          abierto = true;
+          ctx.beginPath();
+          ctx.arc(100, 100, 50, 0, Math.PI * 2);
+          ctx.fillStyle = "blue";
+          ctx.fill();
+        } else {
+          abierto = false;
+          ctx.fillStyle = "red";
+          ctx.fillRect(50, 50, 100, 100);
+
+          ctx.beginPath();
+          ctx.moveTo(-10, 200);
+          ctx.lineTo(200, -10);
+          ctx.strokeStyle = "red";
+          ctx.lineWidth = 15;
+          ctx.stroke();
+        }
+        //ctx.clearRect(0, 0, canvas.width, canvas.height);
+      });
+      // Dibujar un rectángulo
+
+      // Dibujar un círculo
+      ctx.beginPath();
+      ctx.arc(300, 100, 50, 0, Math.PI * 2);
+      ctx.fillStyle = "blue";
+      ctx.fill();
+
+      // Dibujar una línea
+      ctx.beginPath();
+      ctx.moveTo(100, 300);
+      ctx.lineTo(300, 300);
+      ctx.strokeStyle = "green";
+      ctx.lineWidth = 5;
+      ctx.stroke();
+    </script>
+  </body>
+</html>

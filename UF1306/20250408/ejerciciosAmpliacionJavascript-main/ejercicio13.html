@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Ejercicio 13 - Formateo de inputs con Cleave.js</title>
+    <script src="https://cdn.jsdelivr.net/npm/cleave.js@1.6.0/dist/cleave.min.js"></script>
+    <style>
+      body {
+        font-family: Arial, sans-serif;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        height: 100vh;
+        margin: 0;
+      }
+
+      .form-group {
+        margin: 15px;
+        width: 300px;
+      }
+
+      label {
+        display: block;
+        margin-bottom: 5px;
+      }
+
+      input {
+        width: 100%;
+        padding: 8px;
+        box-sizing: border-box;
+      }
+    </style>
+  </head>
+  <body>
+    <h1>Formateo de inputs con Cleave.js</h1>
+
+    <div class="form-group">
+      <label for="phone">Teléfono:</label>
+      <input id="phone" placeholder="Ej: (123) 456-7890" />
+    </div>
+
+    <div class="form-group">
+      <label for="date">Fecha:</label>
+      <input id="date" placeholder="Ej: 31/12/2023" />
+    </div>
+
+    <div class="form-group">
+      <label for="credit-card">Tarjeta de crédito:</label>
+      <input id="credit-card" placeholder="Ej: 1234 5678 9012 3456" />
+    </div>
+
+    <script>
+      // Formateo de teléfono
+      new Cleave("#phone", {
+        phone: true,
+        phoneRegionCode: "US",
+      });
+     
+
+      // Formateo de fecha
+      new Cleave("#date", {
+        date: true,
+        delimiter: "/",
+        datePattern: ["d", "m", "Y"],
+      });
+
+      // Formateo de tarjeta de crédito
+      new Cleave("#credit-card", {
+        creditCard: true,
+        delimiter: " ",
+      });
+    </script>
+  </body>
+</html>

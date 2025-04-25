@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Ejercicio 16 - Página completa con scroll con fullPage.js</title>
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/fullPage.js/4.0.15/fullpage.min.css"
+    />
+    <style>
+      body {
+        font-family: Arial, sans-serif;
+        margin: 0;
+        padding: 0;
+      }
+
+      .section {
+        text-align: center;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+      }
+
+      .section h1 {
+        font-size: 3rem;
+        margin-bottom: 20px;
+      }
+
+      .section p {
+        font-size: 1.5rem;
+        max-width: 800px;
+      }
+
+      #section1 {
+        background-color: #4caf50;
+        color: white;
+      }
+      #section2 {
+        background-color: #2196f3;
+        color: white;
+      }
+      #section3 {
+        background-color: #ff5722;
+        color: white;
+      }
+      #section4 {
+        background-color: #9c27b0;
+        color: white;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="fullpage">
+      <div class="section" id="section1">
+        <h1>Página completa con fullPage.js</h1>
+        <p>Desplázate hacia abajo para ver el efecto</p>
+      </div>
+      <div class="section" id="section2">
+        <h1>Sección 2</h1>
+        <p>Esta es la segunda sección</p>
+      </div>
+      <div class="section" id="section3">
+        <h1>Sección 3</h1>
+        <p>Esta es la tercera sección</p>
+      </div>
+      <div class="section" id="section4">
+        <h1>Sección 4</h1>
+        <p>Esta es la cuarta sección</p>
+      </div>
+    </div>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/fullPage.js/4.0.15/fullpage.min.js"></script>
+    <script>
+      new fullpage("#fullpage", {
+        autoScrolling: true,
+        scrollHorizontally: true,
+        navigation: true,
+        navigationPosition: "right",
+        scrollingSpeed: 700,
+      });
+    </script>
+  </body>
+</html>

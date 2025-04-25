@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Ejercicio 15 - Gradientes animados con Granim.js</title>
+    <script src="https://cdn.jsdelivr.net/npm/granim@2.0.0/dist/granim.min.js"></script>
+    <style>
+      body {
+        font-family: Arial, sans-serif;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        height: 100vh;
+        margin: 0;
+      }
+
+      #canvas-basic {
+        position: absolute;
+        width: 100%;
+        height: 100%;
+        z-index: -1;
+      }
+
+      .content {
+        background-color: rgba(255, 255, 255, 0.8);
+        padding: 20px;
+        border-radius: 10px;
+        text-align: center;
+      }
+
+      button {
+        padding: 10px 20px;
+        margin: 5px;
+        cursor: pointer;
+      }
+    </style>
+  </head>
+  <body>
+    <canvas id="canvas-basic"></canvas>
+
+    <div class="content">
+      <h1>Gradientes animados con Granim.js</h1>
+
+      <div>
+        <button id="changeGradientBtn">Cambiar Gradiente</button>
+      </div>
+    </div>
+
+    <script>
+      const granimInstance = new Granim({
+        element: "#canvas-basic",
+        direction: "diagonal",
+        states: {
+          "default-state": {
+            gradients: [
+              ["#FF9966", "#FF5E62"],
+              ["#00F260", "#0575E6"],
+              ["#e1eec3", "#f05053"],
+            ],
+            transitionSpeed: 2000,
+          },
+        },
+      });
+
+      const changeGradientBtn = document.getElementById("changeGradientBtn");
+
+      changeGradientBtn.addEventListener("click", () => {
+        const gradients = [
+          [getRandomColor(), getRandomColor()],
+          [getRandomColor(), getRandomColor()],
+          [getRandomColor(), getRandomColor()],
+        ];
+
+        granimInstance.states["default-state"].gradients = gradients;
+        granimInstance.changeState("default-state");
+      });
+
+      function getRandomColor() {
+        const letters = "0123456789ABCDEF";
+        let color = "#";
+        for (let i = 0; i < 6; i++) {
+          color += letters[Math.floor(Math.random() * 16)];
+        }
+        return color;
+      }
+    </script>
+  </body>
+</html>

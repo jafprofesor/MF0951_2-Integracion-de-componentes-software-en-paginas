@@ -1,0 +1,243 @@
+<!DOCTYPE html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Animación de Trayectoria - Anime.js</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js"></script>
+    <style>
+      body {
+        margin: 0;
+        padding: 20px;
+        min-height: 100vh;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        background: #1a1a1a;
+        font-family: Arial, sans-serif;
+        color: white;
+      }
+      .container {
+        width: 600px;
+        height: 400px;
+        position: relative;
+        background: #2a2a2a;
+        border-radius: 10px;
+        overflow: hidden;
+        margin: 20px;
+      }
+      .element {
+        width: 50px;
+        height: 50px;
+        background: #ff0066;
+        border-radius: 50%;
+        position: absolute;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-weight: bold;
+        color: white;
+        cursor: pointer;
+      }
+      .path {
+        fill: none;
+        stroke: rgba(255, 255, 255, 0.4);
+        stroke-width: 4;
+        position: absolute;
+        transition: stroke 0.3s ease;
+      }
+      .controls {
+        margin-top: 20px;
+        display: flex;
+        gap: 10px;
+        flex-wrap: wrap;
+        justify-content: center;
+      }
+      button {
+        padding: 10px 20px;
+        border: none;
+        border-radius: 5px;
+        background: #ff0066;
+        color: white;
+        cursor: pointer;
+        transition: background 0.3s;
+      }
+      button:hover {
+        background: #cc0052;
+      }
+      .trajectory-info {
+        margin-top: 20px;
+        text-align: center;
+      }
+    </style>
+  </head>
+  <body>
+    <h1>Animación de Trayectoria</h1>
+    <div class="container">
+      <svg width="600" height="400">
+        <path
+          class="path"
+          id="motionPath"
+          d="M50,200 C200,50 400,350 550,200"
+        />
+        <path
+          class="path"
+          id="motionPath2"
+          d="M50,200 C200,350 400,50 550,200"
+        />
+        <path
+          class="path"
+          id="motionPath3"
+          d="M300,50 C100,200 500,200 300,350"
+        />
+      </svg>
+      <div class="element" id="element">1</div>
+    </div>
+
+    <div class="controls">
+      <button onclick="playAnimation('motionPath')">Trayectoria 1</button>
+      <button onclick="playAnimation('motionPath2')">Trayectoria 2</button>
+      <button onclick="playAnimation('motionPath3')">Trayectoria 3</button>
+      <button onclick="customAnimation()">Animación Personalizada</button>
+      <button onclick="toggleAnimation()">Pausar/Reanudar</button>
+    </div>
+
+    <div class="trajectory-info">
+      <p>Velocidad: <span id="speed">3000</span>ms</p>
+      <input
+        type="range"
+        min="1000"
+        max="5000"
+        value="3000"
+        step="100"
+        oninput="updateSpeed(this.value)"
+        style="width: 200px"
+      />
+    </div>
+
+    <script>
+      let currentAnimation = null;
+      let animationSpeed = 3000;
+
+      function playAnimation(pathId) {
+        if (currentAnimation) {
+          currentAnimation.pause();
+          currentAnimation.seek(0);
+        }
+
+        const path = anime.path(`#${pathId}`);
+        const element = document.getElementById("element");
+        element.style.transform = "translate(0, 0) rotate(0deg)";
+
+        // Resaltar la trayectoria activa
+        document.querySelectorAll(".path").forEach((p) => {
+          p.style.stroke = "rgba(255, 255, 255, 0.2)";
+        });
+        document.querySelector(`#${pathId}`).style.stroke =
+          "rgba(255, 255, 255, 0.6)";
+
+        currentAnimation = anime({
+          targets: "#element",
+          translateX: path("x"),
+          translateY: path("y"),
+          rotate: {
+            value: path("angle"),
+            duration: animationSpeed,
+          },
+          duration: animationSpeed,
+          easing: "easeInOutQuad",
+          loop: true,
+          autoplay: true,
+          update: function (anim) {
+            if (anim.paused) return;
+          },
+        });
+      }
+
+      function customAnimation() {
+        if (currentAnimation) {
+          currentAnimation.pause();
+          currentAnimation.seek(0);
+        }
+
+        const element = document.getElementById("element");
+        element.style.transform = "translate(0, 0) rotate(0deg) scale(1)";
+
+        currentAnimation = anime({
+          targets: "#element",
+          translateX: [
+            { value: 550, duration: animationSpeed },
+            { value: 50, duration: animationSpeed },
+          ],
+          translateY: [
+            { value: 350, duration: animationSpeed / 2 },
+            { value: 50, duration: animationSpeed / 2 },
+            { value: 350, duration: animationSpeed / 2 },
+            { value: 50, duration: animationSpeed / 2 },
+          ],
+          rotate: {
+            value: "+=360",
+            duration: animationSpeed / 2,
+            easing: "easeInOutSine",
+          },
+          scale: [
+            { value: 1.5, duration: animationSpeed / 4 },
+            { value: 1, duration: animationSpeed / 4 },
+          ],
+          loop: true,
+          easing: "easeInOutSine",
+          autoplay: true,
+          update: function (anim) {
+            if (anim.paused) return;
+          },
+        });
+      }
+
+      function toggleAnimation() {
+        if (currentAnimation) {
+          if (currentAnimation.paused) {
+            currentAnimation.play();
+          } else {
+            currentAnimation.pause();
+          }
+        }
+      }
+
+      function updateSpeed(value) {
+        animationSpeed = parseInt(value);
+        document.getElementById("speed").textContent = value;
+        if (currentAnimation) {
+          const isPlaying = !currentAnimation.paused;
+          const progress = currentAnimation.progress;
+          const currentPath =
+            document.querySelector('.path[style*="opacity: 0.3"]')?.id ||
+            "motionPath";
+          currentAnimation.pause();
+          if (isPlaying) {
+            playAnimation(currentPath);
+            currentAnimation.seek(currentAnimation.duration * (progress / 100));
+          }
+        }
+      }
+
+      // Iniciar con la primera trayectoria
+      playAnimation("motionPath");
+
+      // Añadir interactividad al elemento
+      const element = document.getElementById("element");
+      element.addEventListener("click", () => {
+        anime({
+          targets: "#element",
+          scale: [
+            { value: 1.5, duration: 100, easing: "easeInOutQuad" },
+            { value: 1, duration: 200, easing: "easeInOutQuad" },
+          ],
+          backgroundColor: [
+            { value: "#00ff88", duration: 100 },
+            { value: "#ff0066", duration: 200 },
+          ],
+        });
+      });
+    </script>
+  </body>
+</html>

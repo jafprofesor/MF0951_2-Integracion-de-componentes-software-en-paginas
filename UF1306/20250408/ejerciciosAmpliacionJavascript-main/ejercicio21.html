@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Transición de Gradientes - Granim.js</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/granim/2.0.0/granim.min.js"></script>
+    <style>
+      body {
+        margin: 0;
+        padding: 0;
+        height: 100vh;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        font-family: Arial, sans-serif;
+      }
+      #canvas-basic {
+        position: absolute;
+        width: 100%;
+        height: 100%;
+        z-index: -1;
+      }
+      .controls {
+        background: rgba(255, 255, 255, 0.8);
+        padding: 20px;
+        border-radius: 10px;
+        margin-top: 20px;
+        text-align: center;
+      }
+      button {
+        padding: 10px 20px;
+        margin: 5px;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+        background: #333;
+        color: white;
+        transition: background 0.3s;
+      }
+      button:hover {
+        background: #555;
+      }
+    </style>
+  </head>
+  <body>
+    <canvas id="canvas-basic"></canvas>
+    <div class="controls">
+      <h2>Control de Gradientes</h2>
+      <button onclick="granimInstance.changeState('default-state')">
+        Estado Por Defecto
+      </button>
+      <button onclick="granimInstance.changeState('evening-state')">
+        Estado Atardecer
+      </button>
+      <button onclick="granimInstance.changeState('night-state')">
+        Estado Noche
+      </button>
+      <button onclick="toggleAnimation()">Pausar/Reanudar</button>
+    </div>
+
+    <script>
+      var granimInstance = new Granim({
+        element: "#canvas-basic",
+        direction: "diagonal",
+        isPausedWhenNotInView: true,
+        states: {
+          "default-state": {
+            gradients: [
+              ["#ff9966", "#ff5e62"],
+              ["#00F260", "#0575E6"],
+              ["#e1eec3", "#f05053"],
+            ],
+            transitionSpeed: 7000,
+          },
+          "evening-state": {
+            gradients: [
+              ["#ff8c00", "#ff0080"],
+              ["#ff0080", "#7928ca"],
+              ["#7928ca", "#ff8c00"],
+            ],
+            transitionSpeed: 5000,
+          },
+          "night-state": {
+            gradients: [
+              ["#141e30", "#243b55"],
+              ["#243b55", "#141e30"],
+              ["#141e30", "#45a247"],
+            ],
+            transitionSpeed: 3000,
+          },
+        },
+      });
+
+      function toggleAnimation() {
+        if (granimInstance.isPaused) {
+          granimInstance.play();
+        } else {
+          granimInstance.pause();
+        }
+      }
+
+      // Añadir interactividad con el mouse
+      document
+        .getElementById("canvas-basic")
+        .addEventListener("mousemove", function (e) {
+          const x = e.clientX / window.innerWidth;
+          const y = e.clientY / window.innerHeight;
+
+          // Ajustar la velocidad de transición basada en la posición del mouse
+          const newSpeed = 2000 + x * y * 8000;
+          granimInstance.changeTransitionSpeed(newSpeed);
+        });
+    </script>
+  </body>
+</html>

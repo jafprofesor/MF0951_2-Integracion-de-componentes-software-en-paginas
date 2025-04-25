@@ -1,0 +1,307 @@
+<!DOCTYPE html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Ejercicio 14 Opcion 2 - Animación compleja con GSAP</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.11.4/gsap.min.js"></script>
+    <style>
+      body {
+        font-family: Arial, sans-serif;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        height: 100vh;
+        margin: 0;
+        background: #1a1a1a;
+        color: white;
+        overflow: hidden;
+      }
+
+      .container {
+        position: relative;
+        width: 800px;
+        height: 400px;
+        perspective: 1000px;
+        /*añadido-para que las cajas verdes queden en el centro*/
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+      }
+
+      .box {
+        width: 80px;
+        height: 80px;
+        background: linear-gradient(45deg, #4caf50, #45a049);
+        border-radius: 15px;
+        position: absolute;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        color: white;
+        font-weight: bold;
+        font-size: 1.5em;
+        box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+        cursor: pointer;
+        transition: background 0.3s;
+      }
+
+      .box:hover {
+        background: linear-gradient(45deg, #45a049, #4caf50);
+      }
+
+      .controls {
+        margin-top: 30px;
+        display: flex;
+        gap: 15px;
+      }
+
+      button {
+        padding: 12px 24px;
+        border: none;
+        border-radius: 8px;
+        background: #4caf50;
+        color: white;
+        font-weight: bold;
+        cursor: pointer;
+        transition: all 0.3s;
+        text-transform: uppercase;
+        letter-spacing: 1px;
+      }
+
+      button:hover {
+        background: #45a049;
+        transform: translateY(-2px);
+      }
+
+      button:active {
+        transform: translateY(0);
+      }
+    </style>
+  </head>
+  <body>
+    <h1>Animación compleja con GSAP</h1>
+
+    <div class="container">
+      <div class="box" id="box1">1</div>
+      <div class="box" id="box2">2</div>
+      <div class="box" id="box3">3</div>
+    </div>
+
+    <div class="controls">
+      <button id="startBtn">Iniciar</button>
+      <button id="resetBtn">Reiniciar</button>
+    </div>
+
+    <script>
+      let box1 = document.getElementById('box1');
+      let box2 = document.getElementById('box2');
+      let box3 = document.getElementById('box3');
+
+   // const boxes = gsap.utils.toArray(".box");
+      const startBtn = document.getElementById("startBtn");
+      const resetBtn = document.getElementById("resetBtn");
+      let mainTimeline;
+      let isAnimating = false;
+
+      // Posición inicial
+      gsap.set(box1, {
+        x: 0,
+        y: 0,
+        scale: 1,
+        rotation: 0,
+        transformOrigin: "50% 50%",
+      });
+
+      gsap.set(box2, {
+        x: 0,
+        y: 0,
+        scale: 1,
+        rotation: 0,
+        transformOrigin: "50% 50%",
+      })
+
+      gsap.set(box3, {
+        x: 0,
+        y: 0,
+        scale: 1,
+        rotation: 0,
+        transformOrigin: "50% 50%",
+      })
+
+      function createAnimation() {
+        const tl = gsap.timeline({
+          paused: true,
+          defaults: { duration: 1, ease: "power2.inOut" },
+        });
+
+        // Animación sincronizada de las cajas
+        
+        /*empiezan las cajas solapadas, son 3 porque 
+        cada una tiene la distancia X distinta*/
+        tl.to(box3, { 
+          x: 200,
+          y: 0,
+          ease: "power1.inOut",
+        })
+          .to(box2, {
+            x: 100,
+            y: 0,
+            ease: "power2.inOut",
+          })
+          .to(box1, {
+            x: 0,
+            y: 0,
+            ease: "power3.inOut",
+          })
+          .to([box1,box2,box3], {
+            x:-200,
+          })
+
+          /* experimento que funciona, hacemos un array con las cajas
+          todas tiene los mismos valores */
+          .to([box1,box2,box3], { 
+            x: "random(-200, 200)",
+            y: "random(-100, 200)",
+            rotation: "random(-360, 360)",
+            scale: "random(0.5, 1.5)",
+            stagger: { amount: 0.3 },
+            ease: "power2.inOut",
+            duration:0.3,
+          })
+/*
+          .to(box1, {
+            x: "random(-200, 200)",
+            y: "random(-100, 10)",
+            rotation: "random(-360, 360)",
+            scale: "random(0.3, 2)",
+            stagger: { amount: 0.5 },
+            ease: "power2.inOut",
+           // duration: 0.3,
+          })
+          .to(box2, {
+            x: "random(-200, 200)",
+            y: "random(-100, 10)",
+            rotation: "random(-360, 360)",
+            scale: "random(0.3, 2)",
+            stagger: { amount: 0.5 },
+            ease: "power2.inOut",
+           // duration: 0.3,
+          })
+          .to(box3, {
+            x: "random(-200, 200)",
+            y: "random(-100, 10)",
+            rotation: "random(-360, 360)",
+            scale: "random(0.3, 2)",
+            stagger: { amount: 0.5 },
+            ease: "power2.inOut",
+           // duration: 0.3,
+          })
+*/
+        return tl;
+      }
+
+      // Interactividad en las cajas
+   /*   boxes.forEach((box) => {
+        box.addEventListener("click", () => {
+          if (!isAnimating) {
+            gsap.to(box, {
+              scale: 1.2,
+              rotation: "+=180",
+              duration: 0.5,
+              ease: "back.out(1.7)",
+            });
+          }
+        });
+      }); */
+
+      startBtn.addEventListener("click", () => {
+        if (isAnimating) return;
+        isAnimating = true;
+        mainTimeline = createAnimation();
+        mainTimeline.play().then(() => {
+          isAnimating = false;
+        });
+      });
+      
+
+//-----------COPILOT FUNCTION KILL() DE FORMA SUAVE----------
+      
+      resetBtn.addEventListener("click", () => {
+  if (mainTimeline) {
+    // Reducir la velocidad de la animación antes de matarla
+    gsap.to(mainTimeline, {
+      timeScale: 0.2, // Reducir la velocidad
+      duration: 0.5, // Duración de la desaceleración
+      onComplete: () => {
+        mainTimeline.kill(); // Matar el timeline una vez desacelerado
+        
+        // Restablecer a posición inicial con suavidad
+        gsap.to([box1, box2, box3], {
+          x: 0,
+          y: 0,
+          scale: 1,
+          rotation: 0,
+          transformOrigin: "50% 50%",
+          duration: 1.5, // Duración de la transición suave
+          ease: "power2.inOut", // Suavizar el movimiento
+        });
+
+        isAnimating = false;
+      },
+    });
+  } else {
+    // Restablecer directamente si no hay animación activa
+    gsap.to([box1, box2, box3], {
+      x: 0,
+      y: 0,
+      scale: 1,
+      rotation: 0,
+      transformOrigin: "50% 50%",
+      duration: 1.5, // Duración de la transición suave
+      ease: "power2.inOut", // Suavizar el movimiento
+    });
+    isAnimating = false;
+  }
+});
+
+//------------------------------------------------------
+
+/*
+      resetBtn.addEventListener("click", () => {
+        if (mainTimeline) {
+          mainTimeline.kill();
+        }
+        // Posición inicial
+        gsap.set(box1, {
+          x: 0,
+          y: 0,
+          scale: 1,
+          rotation: 0,
+          transformOrigin: "50% 50%",
+          ease: "power2.inOut",
+        });
+        gsap.set(box2, {
+          x: 0,
+          y: 0,
+          scale: 1,
+          rotation: 0,
+          transformOrigin: "50% 50%",
+          ease: "power2.inOut",
+        });
+        gsap.set(box3, {
+          x: 0,
+          y: 0,
+          scale: 1,
+          rotation: 0,
+          transformOrigin: "50% 50%",
+          ease: "power2.inOut",
+        });
+        isAnimating = false;
+      });
+*/
+    </script>
+  </body>
+</html>

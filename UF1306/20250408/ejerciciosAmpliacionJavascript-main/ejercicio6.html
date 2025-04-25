@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Ejercicio 6 - Notificación con SweetAlert2</title>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <style>
+      body {
+        font-family: Arial, sans-serif;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        height: 100vh;
+        margin: 0;
+      }
+
+      button {
+        padding: 10px 20px;
+        margin: 5px;
+        cursor: pointer;
+      }
+    </style>
+  </head>
+  <body>
+    <h1>Notificación con SweetAlert2</h1>
+
+    <div>
+      <button id="successBtn">Éxito</button>
+      <button id="errorBtn">Error</button>
+      <button id="warningBtn">Advertencia</button>
+      <button id="infoBtn">Información</button>
+    </div>
+
+    <script>
+      const successBtn = document.getElementById("successBtn");
+      const errorBtn = document.getElementById("errorBtn");
+      const warningBtn = document.getElementById("warningBtn");
+      const infoBtn = document.getElementById("infoBtn");
+
+      successBtn.addEventListener("click", () => {
+        Swal.fire({
+          title: "¡Éxito!",
+          text: "La operación se completó correctamente",
+          icon: "success",
+          confirmButtonText: "Aceptar",
+        });
+      });
+
+      errorBtn.addEventListener("click", () => {
+        Swal.fire({
+          title: "Error",
+          text: "Ocurrió un problema al procesar la solicitud",
+          icon: "error",
+          confirmButtonText: "Entendido",
+        });
+      });
+
+      warningBtn.addEventListener("click", () => {
+        Swal.fire({
+          title: "Advertencia",
+          text: "Esta acción no se puede deshacer",
+          icon: "warning",
+          confirmButtonText: "Continuar",
+        });
+      });
+
+      infoBtn.addEventListener("click", () => {
+        Swal.fire({
+          title: "Información",
+          text: "Esta es una notificación informativa",
+          icon: "info",
+          confirmButtonText: "OK",
+        });
+      });
+    </script>
+  </body>
+</html>

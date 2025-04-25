@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Ejercicio 9 - Animación SVG con GSAP</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.11.4/gsap.min.js"></script>
+    <style>
+      body {
+        font-family: Arial, sans-serif;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        height: 100vh;
+        margin: 0;
+      }
+
+      svg {
+        width: 300px;
+        height: 300px;
+      }
+
+      button {
+        padding: 10px 20px;
+        margin: 5px;
+        cursor: pointer;
+      }
+    </style>
+  </head>
+  <body>
+    <h1>Animación SVG con GSAP</h1>
+
+    <svg viewBox="0 0 200 200">
+      <circle id="circle" cx="100" cy="100" r="30" fill="#4CAF50" />
+      <rect id="rect" x="50" y="50" width="40" height="40" fill="#2196F3" />
+      <polygon id="triangle" points="100,30 70,90 130,90" fill="#FF5722" />
+    </svg>
+
+    <div>
+      <button id="animateBtn">Animar</button>
+      <button id="resetBtn">Reiniciar</button>
+    </div>
+
+    <script>
+      const circle = document.getElementById("circle");
+      const rect = document.getElementById("rect");
+      const triangle = document.getElementById("triangle");
+      const animateBtn = document.getElementById("animateBtn");
+      const resetBtn = document.getElementById("resetBtn");
+
+      animateBtn.addEventListener("click", () => {
+        gsap.to(circle, {
+          duration: 1,
+          attr: { r: 50 },
+          fill: "#9C27B0",
+          ease: "bounce.out",
+        });
+        gsap.to(rect, {
+          duration: 1,
+          attr: { width: 80, height: 80 },
+          fill: "#009688",
+          ease: "elastic.out",
+        });
+        gsap.to(triangle, {
+          duration: 1,
+         // attr: { points: "100,30 70,90 130,90" },
+         attr: { points: "100,30 70,50 130,50" },
+          fill: "#FFC107",
+          ease: "back.out",
+          
+        });
+      });
+
+      resetBtn.addEventListener("click", () => {
+        gsap.to(circle, { duration: 0.5, attr: { r: 30 }, fill: "#4CAF50" });
+        gsap.to(rect, {
+          duration: 0.5,
+          attr: { width: 40, height: 40 },
+          fill: "#2196F3",
+        });
+        gsap.to(triangle, {
+          duration: 0.5,
+          attr: { points: "100,30 70,90 130,90" },
+          fill: "#FF5722",
+        });
+      });
+    </script>
+  </body>
+</html>

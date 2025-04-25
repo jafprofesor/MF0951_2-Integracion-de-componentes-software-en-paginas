@@ -1,0 +1,255 @@
+<!DOCTYPE html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Ejercicio 20 - Animación Coordinada con GSAP</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.11.4/gsap.min.js"></script>
+    <style>
+      body {
+        font-family: Arial, sans-serif;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        height: 100vh;
+        margin: 0;
+        background: linear-gradient(45deg, #1a1a1a, #2a2a2a);
+        color: white;
+        overflow: hidden;
+      }
+
+      .stage {
+        position: relative;
+        width: 800px;
+        height: 400px;
+        perspective: 1000px;
+        margin: 20px;
+      }
+
+      .box {
+        width: 80px;
+        height: 80px;
+        background: linear-gradient(135deg, #ff4081, #ff6b6b);
+        border-radius: 12px;
+        position: absolute;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        color: white;
+        font-weight: bold;
+        font-size: 1.5em;
+        box-shadow: 0 8px 20px rgba(255, 64, 129, 0.3);
+        cursor: pointer;
+        transition: transform 0.2s;
+        backdrop-filter: blur(5px);
+      }
+
+      .box:hover {
+        transform: scale(1.1);
+      }
+
+      .controls {
+        margin-top: 30px;
+        display: flex;
+        gap: 15px;
+      }
+
+      button {
+        padding: 12px 25px;
+        border: none;
+        border-radius: 25px;
+        background: linear-gradient(135deg, #ff4081, #ff6b6b);
+        color: white;
+        font-weight: bold;
+        cursor: pointer;
+        transition: all 0.3s;
+        text-transform: uppercase;
+        letter-spacing: 1px;
+        box-shadow: 0 4px 15px rgba(255, 64, 129, 0.3);
+      }
+
+      button:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 6px 20px rgba(255, 64, 129, 0.4);
+      }
+
+      button:active {
+        transform: translateY(0);
+      }
+
+      button:disabled {
+        opacity: 0.6;
+        cursor: not-allowed;
+      }
+    </style>
+  </head>
+  <body>
+    <h1>Animación Coordinada con GSAP</h1>
+
+    <div class="stage">
+      <div class="box" id="box1">1</div>
+      <div class="box" id="box2">2</div>
+      <div class="box" id="box3">3</div>
+    </div>
+
+    <div class="controls">
+      <button id="startBtn">Iniciar</button>
+      <button id="pauseBtn">Pausar</button>
+      <button id="resetBtn">Reiniciar</button>
+      <div
+        class="speed-control"
+        style="display: flex; align-items: center; gap: 10px"
+      >
+        <label style="color: white">Velocidad:</label>
+        <input
+          type="range"
+          id="speedControl"
+          min="0.5"
+          max="2"
+          step="0.1"
+          value="1"
+          style="width: 100px"
+        />
+        <span id="speedValue" style="color: white">1x</span>
+      </div>
+    </div>
+
+    <script>
+      const boxes = gsap.utils.toArray(".box");
+      const startBtn = document.getElementById("startBtn");
+      const resetBtn = document.getElementById("resetBtn");
+      let mainTimeline;
+      let isAnimating = false;
+
+      // Configuración inicial
+      function initializeBoxes() {
+        gsap.set(boxes, {
+          x: 0,
+          y: 0,
+          scale: 1,
+          rotation: 0,
+          opacity: 1,
+          transformOrigin: "50% 50%",
+        });
+
+        // Posiciones iniciales específicas
+        gsap.set("#box1", { x: -200 });
+        gsap.set("#box2", { y: -50 });
+        gsap.set("#box3", { x: 200 });
+      }
+
+      let animationSpeed = 1;
+      const speedControl = document.getElementById("speedControl");
+      const speedValue = document.getElementById("speedValue");
+      const pauseBtn = document.getElementById("pauseBtn");
+
+      speedControl.addEventListener("input", (e) => {
+        animationSpeed = parseFloat(e.target.value);
+        speedValue.textContent = animationSpeed.toFixed(1) + "x";
+        if (mainTimeline) {
+          mainTimeline.timeScale(animationSpeed);
+        }
+      });
+
+      function createCoordinatedAnimation() {
+        const tl = gsap.timeline({
+          paused: true,
+          defaults: { duration: 1.2, ease: "power2.inOut" },
+        });
+
+        // Secuencia de animación coordinada
+        tl.to(boxes, {
+          x: "+=100",
+          y: "+=50",
+          rotation: 180,
+          scale: 1.2,
+          stagger: { amount: 0.4 },
+          ease: "back.out(1.7)",
+        })
+          .to(boxes, {
+            x: "-=200",
+            y: "-=100",
+            rotation: 360,
+            scale: 0.8,
+            stagger: { amount: 0.4 },
+            ease: "power1.inOut",
+          })
+          .to(boxes, {
+            x: 0,
+            y: 0,
+            rotation: 720,
+            scale: 1,
+            stagger: { amount: 0.4 },
+            ease: "elastic.out(1, 0.3)",
+          });
+
+        return tl;
+      }
+
+      // Interactividad en las cajas
+      boxes.forEach((box) => {
+        box.addEventListener("click", () => {
+          if (!isAnimating) {
+            gsap.to(box, {
+              scale: 1.2,
+              rotation: "+=180",
+              duration: 0.5,
+              ease: "back.out(1.7)",
+              yoyo: true,
+              repeat: 1,
+            });
+          }
+        });
+      });
+
+      startBtn.addEventListener("click", () => {
+        if (isAnimating) return;
+        isAnimating = true;
+        startBtn.disabled = true;
+        pauseBtn.disabled = false;
+        resetBtn.disabled = false;
+
+        if (!mainTimeline) {
+          mainTimeline = createCoordinatedAnimation();
+        }
+        mainTimeline.timeScale(animationSpeed);
+        mainTimeline.play();
+      });
+
+      pauseBtn.addEventListener("click", () => {
+        if (mainTimeline) {
+          mainTimeline.pause();
+          isAnimating = false;
+          startBtn.disabled = false;
+          pauseBtn.disabled = true;
+        }
+      });
+
+      resetBtn.addEventListener("click", () => {
+        if (mainTimeline) {
+          mainTimeline.kill();
+        }
+
+        resetBtn.disabled = true;
+        gsap.to(boxes, {
+          x: 0,
+          y: 0,
+          scale: 1,
+          rotation: 0,
+          duration: 0.8,
+          ease: "power3.out",
+          stagger: { amount: 0.2 },
+          onComplete: () => {
+            isAnimating = false;
+            startBtn.disabled = false;
+            initializeBoxes();
+          },
+        });
+      });
+
+      // Inicializar
+      initializeBoxes();
+    </script>
+  </body>
+</html>

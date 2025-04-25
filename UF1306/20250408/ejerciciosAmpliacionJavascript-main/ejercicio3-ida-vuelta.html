@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Ejercicio 3 - GSAP</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.11.4/gsap.min.js"></script>
+    <style>
+      body {
+        font-family: Arial, sans-serif;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        height: 100vh;
+        margin: 0;
+      }
+      .box {
+        width: 100px;
+        height: 100px;
+        background-color: #4caf50;
+        margin: 20px;
+      }
+    </style>
+  </head>
+  <body>
+    <h1>Animación con GSAP</h1>
+    <div class="box"></div>
+    <button id="animate">Animar-ida y vuelta</button>
+    <small><br>Cuando se pare en el lado derecho, pulsa de nuevo el botón.</small>
+
+    <script>
+    
+      const box = document.querySelector(".box");
+      const animateBtn = document.getElementById("animate");
+      let animando = false; // Flag para rastrear el estado de animación.
+
+      let animacion;
+
+      animateBtn.addEventListener("click", () => {
+        if (!animando) {
+          // Crear y reproducir la animación hacia adelante.
+          animacion = gsap.to(box, {
+            duration: 2,
+            x: 300,
+            rotation: 360,
+            ease: "bounce.out",
+          });
+          animando = true;
+        } else {
+          // Revertir la animación (volver al inicio).
+          animacion.reverse();
+          animando = false;
+        }
+      }); 
+    
+
+      /* intento de animacion con fromTo y añadiendo la animacion,
+      pero con cambios- no iba del todo, se quedaba quieto en la zona dcha.
+      referencia: ejercicio 6 de gsap (arriba y abajo)
+
+     const box = document.querySelector(".box");
+      const animateBtn = document.getElementById("animate");
+    
+      animateBtn.addEventListener("click", () => {
+        gsap.fromTo(box, {
+          duration: 2,
+          x: 0,
+          rotation: -360,
+          ease: "bounce.out",
+          yoyo: true,
+          repeat: -1,
+        },
+        {
+          duration: 2,
+          x: 300,
+          rotation: 360,
+          ease: "bounce.out",
+        }
+      ); animateBtn.reverse();        
+      });
+      */
+
+    </script>
+  </body>
+</html>

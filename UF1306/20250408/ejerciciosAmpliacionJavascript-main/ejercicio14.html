@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Ejercicio 14 - Animación compleja con GSAP</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.11.4/gsap.min.js"></script>
+    <style>
+      body {
+        font-family: Arial, sans-serif;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        height: 100vh;
+        margin: 0;
+        background: #1a1a1a;
+        color: white;
+        overflow: hidden;
+      }
+
+      .container {
+        position: relative;
+        width: 800px;
+        height: 400px;
+        perspective: 1000px;
+      }
+
+      .box {
+        width: 80px;
+        height: 80px;
+        background: linear-gradient(45deg, #4caf50, #45a049);
+        border-radius: 15px;
+        position: absolute;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        color: white;
+        font-weight: bold;
+        font-size: 1.5em;
+        box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+        cursor: pointer;
+        transition: background 0.3s;
+      }
+
+      .box:hover {
+        background: linear-gradient(45deg, #45a049, #4caf50);
+      }
+
+      .controls {
+        margin-top: 30px;
+        display: flex;
+        gap: 15px;
+      }
+
+      button {
+        padding: 12px 24px;
+        border: none;
+        border-radius: 8px;
+        background: #4caf50;
+        color: white;
+        font-weight: bold;
+        cursor: pointer;
+        transition: all 0.3s;
+        text-transform: uppercase;
+        letter-spacing: 1px;
+      }
+
+      button:hover {
+        background: #45a049;
+        transform: translateY(-2px);
+      }
+
+      button:active {
+        transform: translateY(0);
+      }
+    </style>
+  </head>
+  <body>
+    <h1>Animación compleja con GSAP</h1>
+
+    <div class="container">
+      <div class="box" id="box1">1</div>
+      <div class="box" id="box2">2</div>
+      <div class="box" id="box3">3</div>
+    </div>
+
+    <div class="controls">
+      <button id="startBtn">Iniciar</button>
+      <button id="resetBtn">Reiniciar</button>
+    </div>
+
+    <script>
+      const boxes = gsap.utils.toArray(".box");
+      const startBtn = document.getElementById("startBtn");
+      const resetBtn = document.getElementById("resetBtn");
+      let mainTimeline;
+      let isAnimating = false;
+
+      // Posición inicial
+      gsap.set(boxes, {
+        x: 0,
+        y: 0,
+        scale: 1,
+        rotation: 0,
+        transformOrigin: "50% 50%",
+      });
+
+      function createAnimation() {
+        const tl = gsap.timeline({
+          paused: true,
+          defaults: { duration: 1.5, ease: "power2.inOut" },
+        });
+
+        // Animación sincronizada de las cajas
+        tl.to(boxes, {
+          x: "random(-200, 200)",
+          y: "random(-100, 100)",
+          rotation: "random(-180, 180)",
+          scale: "random(0.5, 1.5)",
+          stagger: { amount: 0.5 },
+          ease: "power1.inOut",
+        })
+          .to(boxes, {
+            x: "random(-200, 200)",
+            y: "random(-100, 100)",
+            rotation: "random(-360, 360)",
+            scale: "random(0.8, 1.2)",
+            stagger: { amount: 0.5 },
+            ease: "power2.inOut",
+          })
+          .to(boxes, {
+            x: 0,
+            y: 0,
+            rotation: 360,
+            scale: 1,
+            stagger: { amount: 0.5 },
+            ease: "elastic.out(1, 0.5)",
+          });
+
+        return tl;
+      }
+
+      // Interactividad en las cajas
+      boxes.forEach((box) => {
+        box.addEventListener("click", () => {
+          if (!isAnimating) {
+            gsap.to(box, {
+              scale: 1.2,
+              rotation: "+=180",
+              duration: 0.5,
+              ease: "back.out(1.7)",
+            });
+          }
+        });
+      });
+
+      startBtn.addEventListener("click", () => {
+        if (isAnimating) return;
+        isAnimating = true;
+        mainTimeline = createAnimation();
+        mainTimeline.play().then(() => {
+          isAnimating = false;
+        });
+      });
+
+      resetBtn.addEventListener("click", () => {
+        if (mainTimeline) {
+          mainTimeline.kill();
+        }
+        gsap.to(boxes, {
+          x: 0,
+          y: 0,
+          scale: 1,
+          rotation: 0,
+          duration: 0.8,
+          ease: "power3.out",
+          stagger: { amount: 0.2 },
+          onComplete: () => {
+            isAnimating = false;
+          },
+        });
+      });
+    </script>
+  </body>
+</html>

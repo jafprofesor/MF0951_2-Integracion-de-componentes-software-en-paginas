@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Ejercicio 1 - Contador DOM</title>
+    <style>
+      body {
+        font-family: Arial, sans-serif;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        height: 100vh;
+        margin: 0;
+      }
+      .counter {
+        font-size: 3rem;
+        margin: 20px;
+      }
+      button {
+        padding: 10px 20px;
+        font-size: 1rem;
+        margin: 5px;
+        cursor: pointer;
+      }
+    </style>
+  </head>
+  <body>
+    <h1>Contador Simple</h1>
+    <div class="counter">0</div>
+    <div>
+      <button id="increment">+</button>
+      <button id="decrement">-</button>
+    </div>
+
+    <script>
+      const counterElement = document.querySelector(".counter");
+      const incrementBtn = document.getElementById("increment");
+      const decrementBtn = document.getElementById("decrement");
+
+      // Array de colores
+    let colores = ['crimson', 'royalblue', 'gold', 'green', 'purple'];
+
+      let count = 0;
+
+      incrementBtn.addEventListener("click", () => {
+        if (count < 10) {
+          count++;
+          counterElement.textContent = count;
+          counterElement.style.color = colores[count];
+        }
+      });
+
+      decrementBtn.addEventListener("click", () => {
+        if (count > -10) {
+          count--;
+          counterElement.textContent = count;
+          counterElement.style.color = colores[count];
+        }  
+      });
+    </script>
+  </body>
+</html>

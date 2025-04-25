@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Ejercicio 17 - Animación de texto con Anime.js</title>
+    <script src="https://cdn.jsdelivr.net/npm/animejs@3.2.1/lib/anime.min.js"></script>
+    <style>
+      body {
+        font-family: Arial, sans-serif;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        height: 100vh;
+        margin: 0;
+      }
+
+      h1 {
+        font-size: 3rem;
+        margin-bottom: 30px;
+      }
+
+      .text-animation {
+        font-size: 2rem;
+        font-weight: bold;
+      }
+
+      button {
+        padding: 10px 20px;
+        margin: 5px;
+        cursor: pointer;
+      }
+    </style>
+  </head>
+  <body>
+    <h1>Animación de texto con Anime.js</h1>
+
+    <div class="text-animation" id="animated-text">Texto animado</div>
+
+    <div>
+      <button id="animateBtn">Animar</button>
+      <button id="resetBtn">Reiniciar</button>
+    </div>
+
+    <script>
+      const textElement = document.getElementById("animated-text");
+      const animateBtn = document.getElementById("animateBtn");
+      const resetBtn = document.getElementById("resetBtn");
+      let bodyColor = document.body;
+
+      animateBtn.addEventListener("click", () => {
+        anime({
+          targets: textElement,
+          translateX: 250,
+          rotate: "15turn",
+          backgroundColor: "#FF5722",
+          color: "#FFF",
+          duration: 1000,
+          easing: "easeInOutQuad",
+        });
+        anime ({
+          targets: bodyColor,
+          backgroundColor: '#aed6f1',
+          duration: 1000,
+          easing: "easeInOutQuad",
+        });
+      });
+
+      resetBtn.addEventListener("click", () => {
+        anime({
+          targets: textElement,
+          translateX: 0,
+          rotate: "0turn",
+          backgroundColor: "#fff",
+          color: "#000",
+          duration: 500,
+          easing: "easeInOutQuad",
+        });
+        anime ({
+          targets: bodyColor,
+          backgroundColor:'#fff',
+        })
+      });
+    </script>
+  </body>
+</html>

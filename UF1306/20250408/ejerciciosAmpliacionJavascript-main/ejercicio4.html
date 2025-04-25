@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Ejercicio 4 - SweetAlert2</title>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <style>
+      body {
+        font-family: Arial, sans-serif;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        height: 100vh;
+        margin: 0;
+      }
+      button {
+        padding: 10px 20px;
+        font-size: 1rem;
+        margin: 5px;
+        cursor: pointer;
+      }
+    </style>
+  </head>
+  <body>
+    <h1>Alertas con SweetAlert2</h1>
+    <button id="success">Éxito</button>
+    <button id="error">Error</button>
+    <button id="warning">Advertencia</button>
+    <button id="question">Pregunta</button>
+
+    <script>
+      document.getElementById("success").addEventListener("click", () => {
+        Swal.fire("¡Éxito!", "Operación completada correctamente", "success");
+      });
+
+      document.getElementById("error").addEventListener("click", () => {
+        Swal.fire("¡Error!", "Algo salió mal", "error");
+      });
+
+      document.getElementById("warning").addEventListener("click", () => {
+        Swal.fire("¡Advertencia!", "Ten cuidado con esto", "warning");
+      });
+
+      document.getElementById("question").addEventListener("click", () => {
+        Swal.fire("¿Pregunta?", "¿Estás seguro de continuar?", "question");
+      });
+    </script>
+  </body>
+</html>

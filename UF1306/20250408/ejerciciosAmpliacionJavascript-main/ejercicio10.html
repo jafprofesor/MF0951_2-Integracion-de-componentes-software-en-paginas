@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Ejercicio 10 - Galería de imágenes con animaciones GSAP</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.11.4/gsap.min.js"></script>
+    <style>
+      body {
+        font-family: Arial, sans-serif;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        min-height: 100vh;
+        margin: 0;
+      }
+
+      .gallery {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+        gap: 10px;
+        max-width: 800px;
+        margin: 20px;
+      }
+
+      .gallery img {
+        width: 150px;
+        height: 150px;
+        object-fit: cover;
+        border-radius: 5px;
+        box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+        cursor: pointer;
+      }
+
+      button {
+        padding: 10px 20px;
+        margin: 5px;
+        cursor: pointer;
+      }
+    </style>
+  </head>
+  <body>
+    <h1>Galería de imágenes con animaciones GSAP</h1>
+
+    <div class="gallery">
+      <img src="https://picsum.photos/id/10/300/300" alt="Imagen 1" />
+      <img src="https://picsum.photos/id/11/300/300" alt="Imagen 2" />
+      <img src="https://picsum.photos/id/12/300/300" alt="Imagen 3" />
+      <img src="https://picsum.photos/id/13/300/300" alt="Imagen 4" />
+    </div>
+
+    <div>
+      <button id="animateBtn">Animar</button>
+      <button id="resetBtn">Reiniciar</button>
+    </div>
+
+    <script>
+      const images = document.querySelectorAll(".gallery img");
+      const animateBtn = document.getElementById("animateBtn");
+      const resetBtn = document.getElementById("resetBtn");
+
+      animateBtn.addEventListener("click", () => {
+        gsap.from(images, {
+          duration: 2,
+          opacity: 0,
+          y: 50,
+          stagger: 0,
+          ease: "back.out",
+        });
+
+        gsap.to(images, {
+          duration: 2,
+          rotation: 360,
+          scale: 1.1,
+          stagger: 0,
+          repeat: 1,
+          yoyo: true,
+          ease: "elastic.out",
+        });
+      });
+
+      resetBtn.addEventListener("click", () => {
+        gsap.to(images, {
+          duration: 0.5,
+          opacity: 1,
+          rotation: 0,
+          scale: 1,
+          y: 0,
+        });
+      });
+    </script>
+  </body>
+</html>

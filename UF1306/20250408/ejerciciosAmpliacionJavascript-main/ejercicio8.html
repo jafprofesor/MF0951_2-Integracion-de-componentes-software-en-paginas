@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Ejercicio 8 - Formulario interactivo con SweetAlert2</title>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <style>
+      body {
+        font-family: Arial, sans-serif;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        height: 100vh;
+        margin: 0;
+      }
+
+      button {
+        padding: 10px 20px;
+        margin: 5px;
+        cursor: pointer;
+      }
+    </style>
+  </head>
+  <body>
+    <h1>Formulario interactivo con SweetAlert2</h1>
+
+    <button id="showFormBtn">Mostrar Formulario</button>
+
+    <script>
+      const showFormBtn = document.getElementById("showFormBtn");
+
+      showFormBtn.addEventListener("click", () => {
+        Swal.fire({
+          title: "Formulario de contacto",
+          html: `
+                    <input id="name" class="swal2-input" placeholder="Nombre">
+                    <input id="email" class="swal2-input" placeholder="Email">
+                    <textarea id="message" class="swal2-textarea" placeholder="Mensaje"></textarea>
+                `,
+          confirmButtonText: "Enviar",
+          focusConfirm: false,
+          preConfirm: () => {
+            const name = Swal.getPopup().querySelector("#name").value;
+            const email = Swal.getPopup().querySelector("#email").value;
+            const message = Swal.getPopup().querySelector("#message").value;
+
+            if (!name || !email || !message) {
+              Swal.showValidationMessage("Por favor complete todos los campos");
+              if (name == false) {
+                swal.showValidationMessage('por favo, Escribe tu nombre');
+              }
+              else if (email == false) {
+                Swal.showValidationMessage('por favor, escribe tu e-mail');
+              }
+              else if (message == false) {
+                Swal.showValidationMessage ('por favor, escribe tu mensaje');
+              }
+              return false;
+            }
+ false
+            return { name, email, message };
+          },
+        }).then((result) => {
+          if (result.isConfirmed) {
+            Swal.fire(
+              "¡Enviado!",
+              `Gracias ${result.value.name}, tu mensaje ha sido enviado.`,
+              "success"
+            );
+          }
+        });
+      });
+    </script>
+  </body>
+</html>
