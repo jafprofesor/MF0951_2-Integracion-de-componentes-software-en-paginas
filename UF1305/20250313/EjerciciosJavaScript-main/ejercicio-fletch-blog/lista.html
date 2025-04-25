@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Blog News API</title>
+  </head>
+  <body>
+    <h1>Blog News API</h1>
+    <div id="news-list">
+      <!-- News articles will be loaded here -->
+    </div>
+    <script>
+      const selectElement = document.getElementById("news-list");
+      const url =
+        "https://newsapi.org/v2/everything?" +
+        "q=Apple&" +
+        "from=2025-03-17&" +
+        "sortBy=popularity&" +
+        "apiKey=c2c5473631944e5580e1b411bd86ef8d";
+
+      let req = new Request(url);
+
+      fetch(req).then(function (response) {
+        console.log(response.json());
+      });
+    </script>
+  </body>
+</html>

@@ -1,0 +1,18 @@
+body {
+    font-family: Arial, sans-serif;
+    text-align: center;
+    margin-top: 50px;
+}
+
+.scroll-box {
+    width:50%;
+    height:400px;
+    overflow:scroll;
+    border: 1px solid tomato;
+    margin:0 auto;
+    padding:10px;
+}
+
+.scroll-box p {
+    text-align: left;
+}
