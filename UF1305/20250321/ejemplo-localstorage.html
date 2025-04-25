@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Ejemplo LocalStorage</title>
+  </head>
+  <body>
+    <input type="text" id="datoUsuario" placeholder="Escribe algo" />
+    <button onclick="guardarDato()">Guardar</button>
+    <button onclick="cargarDato()">Cargar</button>
+    <button onclick="borrarDato()">Borrar</button>
+    <div id="mostrador"></div>
+
+    <script>
+      /*
+1. localStorage.setItem('userInput', dato)
+   
+   - Almacena datos usando una clave ( userInput ) y valor ( dato )
+   - Los datos se guardan como strings (si es un objeto, usar JSON.stringify )
+2. localStorage.getItem('userInput')
+   
+   - Recupera el valor asociado a la clave userInput
+   - Devuelve null si la clave no existe
+3. localStorage.removeItem('userInput')
+   
+   - Elimina específicamente el dato almacenado bajo la clave userInput
+4. window.onload
+   
+   - Demuestra que los datos persisten después de cerrar/reabrir el navegador
+   - Los datos en localStorage permanecen hasta que se borran explícitamente
+Características clave:
+
+1. Los datos sobreviven a:
+   
+   - Recargas de página (F5/Ctrl+R)
+   - Cierre del navegador
+   - Reinicios del ordenador
+2. Límites de almacenamiento:
+   
+   - Típicamente 5MB por dominio
+   - Solo almacena strings (para objetos usar JSON)*/
+      // 1. Guardar datos en localStorage
+      function guardarDato() {
+        const dato = document.getElementById("datoUsuario").value;
+
+        // localStorage.setItem guarda el dato como clave-valor
+        // ('clave', valor) - Aquí usamos 'userInput' como clave
+        localStorage.setItem("loQueQuieras", dato);
+
+        alert("Dato guardado correctamente!");
+      }
+
+      // 2. Cargar datos desde localStorage
+      function cargarDato() {
+        // localStorage.getItem recupera el valor usando la clave
+        const datoGuardado = localStorage.getItem("loQueQuieras");
+
+        // Si no existe el dato, devuelve null
+        if (datoGuardado) {
+          document.getElementById(
+            "mostrador"
+          ).textContent = `Dato recuperado: ${datoGuardado}`;
+        } else {
+          alert("No hay datos guardados!");
+        }
+      }
+
+      // 3. Borrar datos específicos
+      function borrarDato() {
+        // Elimina el elemento específico del almacenamiento
+        localStorage.removeItem("loQueQuieras");
+        // localStorage.clear() borra todo el almacenamiento local
+
+        // Actualiza la pantalla
+        document.getElementById("mostrador").textContent = "";
+        alert("Dato borrado!");
+      }
+
+      // Bonus: Cargar datos automáticamente al iniciar
+      window.onload = function () {
+        const datoInicial = localStorage.getItem("loQueQuieras");
+        if (datoInicial) {
+          document.getElementById(
+            "mostrador"
+          ).textContent = `Dato persistente: ${datoInicial}`;
+        }
+      };
+    </script>
+  </body>
+</html>
