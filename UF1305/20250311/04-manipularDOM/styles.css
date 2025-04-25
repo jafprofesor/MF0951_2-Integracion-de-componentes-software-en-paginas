@@ -1,0 +1,94 @@
+/* Estilos generales */
+.container {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 20px;
+    font-family: Arial, sans-serif;
+}
+
+/* Estilos para el título principal */
+#titulo-principal {
+    color: #333;
+    text-align: center;
+    margin-bottom: 30px;
+}
+
+/* Estilos para las secciones */
+section {
+    background-color: #f5f5f5;
+    border-radius: 5px;
+    padding: 20px;
+    margin-bottom: 20px;
+}
+
+section h2 {
+    color: #2c3e50;
+    margin-bottom: 15px;
+}
+
+/* Estilos para elementos con clase */
+.elemento-clase {
+    background-color: #e8f4f8;
+    padding: 10px;
+    margin: 5px 0;
+    border-radius: 3px;
+}
+
+/* Estilos para spans */
+span {
+    display: block;
+    background-color: #fff3e0;
+    padding: 10px;
+    margin: 5px 0;
+    border-radius: 3px;
+}
+
+/* Estilos para párrafos especiales */
+.parrafo-especial {
+    color: #2196f3;
+    font-style: italic;
+    padding: 10px;
+    background-color: #e3f2fd;
+    margin: 5px 0;
+    border-radius: 3px;
+}
+
+/* Estilos para el botón */
+#btn-agregar {
+    background-color: #4caf50;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 3px;
+    cursor: pointer;
+    margin-bottom: 10px;
+}
+
+/*Boton borrar div (creado para borrar los div que aparecen)*/
+#btn-borrar { 
+    background-color: #bd430b;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 3px;
+    cursor: pointer;
+    margin-bottom: 10px;
+}
+
+#btn-agregar:hover {
+    background-color: #45a049;
+}
+
+/* Estilos para elementos dinámicos */
+#contenedor-dinamico div {
+    background-color: #ffecb3;
+    padding: 10px;
+    margin: 5px 0;
+    border-radius: 3px;
+}
+
+/* Estilos para resaltar elementos seleccionados */
+.seleccionado {
+    border: 2px solid #2196f3 !important;
+    transition: border-color 0.3s ease;
+}

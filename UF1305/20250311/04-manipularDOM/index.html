@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Ejercicio: Seleccionar Elementos del DOM</title>
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <div class="container">
+      <h1 id="titulo-principal">Selección de Elementos del DOM</h1>
+
+      <section id="seccion-id">
+        <h2>Selección por ID</h2>
+        <p id="parrafo-id">Este párrafo tiene un ID específico</p>
+      </section>
+
+      <section id="seccion-clase">
+        <h2>Selección por Clase</h2>
+        <div class="elemento-clase">Primer elemento con clase</div>
+        <div class="elemento-clase">Segundo elemento con clase</div>
+        <div class="elemento-clase">Tercer elemento con clase</div>
+      </section>
+
+      <section id="seccion-etiqueta">
+        <h2>Selección por Etiqueta</h2>
+        <span>Primer span</span>
+        <span>Segundo span</span>
+        <span>Tercer span</span>
+      </section>
+
+      <section id="seccion-querySelector">
+        <h2>Selección con querySelector</h2>
+        <div class="query-selector">
+          <p class="parrafo-especial">Párrafo especial 1</p>
+          <p class="parrafo-especial">Párrafo especial 2</p>
+        </div>
+      </section>
+
+      <section id="seccion-dinamica">
+        <h2>Demostración Dinámica</h2>
+        <button id="btn-agregar">Agregar Div</button>
+        <button id="btn-borrar">Borrar Div</button><!--Botón añadido para borrar div creados-->
+        <div id="contenedor-dinamico"></div>
+      </section>
+    </div>
+
+    <!-- Versión sin JavaScript -->
+    <script src="script-empty.js" defer></script>
+    <!-- Versión con JavaScript (comentar la línea anterior y descomentar esta para ver la solución) -->
+    <!-- <script src="script.js"></script> -->
+  </body>
+</html>
