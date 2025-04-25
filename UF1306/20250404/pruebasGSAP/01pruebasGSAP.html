@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>pruebasGSAP</title>
+    <!-- GSAP CDN -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+    <!-- ScrollTrigger Plugin -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
+    <!--Estilos CSS-->
+    <link rel="stylesheet" href="estilos.css">
+    <!--FontAwesome-Iconos-->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    
+</head>
+<body> 
+    <div class="contenedor">
+        <div>
+            <p>Ejercicio 1</p>
+            <p class="box-1 fa-solid fa-car-side"></p>
+        </div>
+       
+        <div>
+            <p>Ejercicio 2</p>
+            <p class="box-2 fa-solid fa-fire-flame-curved"></p>
+        </div>
+        <div>
+            <p>Ejercicio 3</p>
+            <p class="box-3 fa-solid fa-beer-mug-empty"></p>
+        </div>
+        <div>
+            <p>Ejercicio 4</p>
+            <p class="box-4 fa-solid fa-person-biking"></p>
+        </div>
+        <div>
+            <p>Ejercicio 5</p>
+            <p class="box-5 fa-solid fa-paint-roller"></p>
+        </div>
+        <div>
+            <p>Ejercicio 6</p>
+            <button id="botonAnimacion">Animación</button>
+            <p class="box-6 fa-solid fa-circle-arrow-up"></p>
+        </div>
+        <div>
+            <p>Ejercicio7</p>
+            <p class="box-7 fa-solid fa-basketball"></p>
+        </div>
+        <div>
+            <p>Ejercicio8</p>
+            <p class="box-8">
+                <svg width="100" height="100">
+                    <circle class="box-8" cx="50" cy="50" r="40" fill="lavender" />
+                </svg>
+            </p>
+        </div>
+        <div>
+            <p>Ejercicio9</p>
+            <p class="box-9 fa-solid fa-bicycle"></p>
+        </div>
+        <div>
+            <p>Ejercicio10</p>
+            <p class="box-10 fa-solid fa-plane"></p>
+        </div>
+        <div></div>
+        <div></div>
+        <div></div>
+        <div></div>
+        <div></div>
+    </div>
+    <script>
+        //animaciones GASP
+
+        //ejercicio 1
+        gsap.to(".box-1" , {x:200, duration: 1}); 
+
+        //ejercicio 2
+        gsap.to(".box-2" , {opacity:0, duration: 1}); 
+        gsap.to(".box-2" , {scale:2, duration: 1}); 
+
+        //ejercicio 3
+        gsap.to(".box-3", {scale:2 , duration: 2}); 
+        gsap.to(".box-3" , {x:200 , duration: 2});
+
+        //ejercicio 4
+        gsap.to(".box-4" , {x: 200, duration: 1}); 
+        gsap.to(".box-4" , {rotation:360 , duration: 1});
+
+        //ejercicio 5, creamos una variable y añadimos timeline
+        let anima = gsap.timeline(); 
+        anima.to(".box-5" , {rotation: -90})
+             .to(".box-5" , {x: 250})
+             .to(".box-5" , {rotation:0})
+             .to(".box-5" , {y: 50})
+             .to(".box-5" , {rotation: 90})
+             .to(".box-5" , {x:0})
+             .to(".box-5" , {rotation: 180})
+             .to(".box-5" , {y:0})
+             .to(".box-5" , {rotation: -90}) 
+        
+        //ejercicio 6, boton activa mov vertical (Y)
+        let cambio = true; 
+        document.getElementById('botonAnimacion').addEventListener('click', function () {
+            gsap.to(".box-6" , {y: 100, duration: 1});
+            gsap.to(".box-6" , {rotation:180, duration: 0});
+            
+            if (cambio) { //cambio es TRUE
+                gsap.to(".box-6", {y:100, duration: 1});
+            //    cambio=true;
+            } else { 
+                gsap.to(".box-6" , {y:0, duration: 1});
+                gsap.to(".box-6" , {rotation:0, duration: 0})
+            //    cambio=false;
+            }
+            cambio=!cambio; //cambio se cambia FALSE
+        });
+
+         //ejercicio 7
+        gsap.to(".box-7", {x:200, rotation:360, duration:1, repeat:-1, yoyo:true})
+
+        //ejercicico 8
+        gsap.to(".box-8", {attr: {r:25}, duration: 1, repeat:-1, yoyo:true });
+
+        //ejercicio 9
+        gsap.registerPlugin(ScrollTrigger);
+        gsap.to(".box-9", {
+            x:250,
+            duration: 1,
+            scrollTrigger: {
+                trigger: ".box-9",
+                start: "top center",
+                end: "bottom center",
+                scrub: true, //smooth animacion, animacion suave
+                markers: true, // Add markers to see the trigger points
+            },
+        });
+
+        //ejercicio 10 timeLine con sus keyframes
+        //con repeat-1 se hace infinito
+         let animacionGeneral = gsap.timeline({repeat: -1}); 
+
+         let animaUno = gsap.timeline(); //keyframe 1
+            animaUno.to(".box-10",{
+            duration:0.8,
+            x: 250,
+        });
+
+        let animaDos = gsap.timeline(); //keyframe 2
+            animaDos.to(".box-10", {
+            y: 100,
+            
+            rotation:90
+        });
+
+        let animaTres = gsap.timeline(); //keyframe 3
+            animaTres.to(".box-10", {
+            x:0,
+            
+            rotation:180
+        });
+        
+
+        let animaCuatro = gsap.timeline(); //keyframe 4
+            animaCuatro.to(".box-10", {
+            y:0,
+            duration:0.8,
+            rotation:270
+
+            })
+
+        animacionGeneral.add(animaUno).add(animaDos).add(animaTres).add(animaCuatro);
+
+    </script>
+    
+</body>
+</html>
