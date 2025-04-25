@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Ejemplos de Manipulación del DOM</title>
+    <style>
+      body {
+        font-family: Arial, sans-serif;
+        max-width: 800px;
+        margin: 0 auto;
+        padding: 20px;
+      }
+      .ejemplo {
+        border: 1px solid #ddd;
+        margin: 20px 0;
+        padding: 15px;
+        border-radius: 5px;
+      }
+      .ejemplo h3 {
+        margin-top: 0;
+        color: #333;
+      }
+      .miClase {
+        padding: 10px;
+        margin: 5px 0;
+      }
+      .nuevaClase {
+        font-weight: bold;
+        color: blue;
+      }
+      button {
+        padding: 5px 10px;
+        margin: 5px 0;
+      }
+      .contenedor {
+        border: 1px dashed #999;
+        padding: 10px;
+        margin: 10px 0;
+      }
+    </style>
+  </head>
+  <body>
+    <h1>Ejemplos de Manipulación del DOM</h1>
+
+    <!-- Ejemplo 1: getElementById -->
+    <div class="ejemplo">
+      <h3>1. Seleccionar por ID</h3>
+      <div id="miDiv">Contenido original</div>
+    </div>
+
+    <!-- Ejemplo 2: getElementsByClassName -->
+    <div class="ejemplo">
+      <h3>2. Seleccionar por Clase</h3>
+      <div class="miClase">Elemento 1</div>
+      <div class="miClase">Elemento 2</div>
+    </div>
+
+    <!-- Ejemplo 3: getElementsByTagName -->
+    <div class="ejemplo">
+      <h3>3. Seleccionar por Etiqueta</h3>
+      <p>Párrafo 1</p>
+      <p>Párrafo 2</p>
+      <button onclick="mostrarParrafos()">Mostrar párrafos</button>
+    </div>
+
+    <!-- Ejemplo 4: querySelector -->
+    <p>Esto está en otro sitido</p>
+    <div class="ejemplo">
+      <h3>4. querySelector</h3>
+      <div class="miClase">Elemento 1</div>
+      <div class="miClase">Elemento 2</div>
+    </div>
+
+    <!-- Ejemplo 5: querySelectorAll -->
+    <div class="ejemplo">
+      <h3>5. querySelectorAll</h3>
+      <div class="miClase">Elemento 1</div>
+      <div class="miClase">Elemento 2</div>
+    </div>
+
+    <!-- Ejemplo 6: createElement -->
+    <div class="ejemplo">
+      <h3>6. Crear y Agregar Elementos</h3>
+      <div id="contenedor" class="contenedor">Contenedor vacío</div>
+      <p>Esto está en el HTML y del div.</p>
+    </div>
+    <p>Esto está fuera del div.</p>
+
+    <!-- Ejemplo 7: remove -->
+    <div class="ejemplo">
+      <h3>7. Eliminar Elementos</h3>
+      <div id="elementoAEliminar">Este elemento será eliminado</div>
+      <button onclick="eliminarElemento()">Eliminar elemento</button>
+    </div>
+
+    <!-- Ejemplo 8: Cambiar atributos -->
+    <div class="ejemplo">
+      <h3>8. Cambiar Atributos</h3>
+      <img id="miImagen" src="cafeteria.png" alt="Imagen 1" width="150" />
+      <button onclick="cambiarImagen()">Cambiar imagen</button>
+    </div>
+
+    <!-- Ejemplo 9: Eventos -->
+    <div class="ejemplo">
+      <h3>9. Eventos</h3>
+      <button class="miBoton">Haz clic</button>
+    </div>
+
+    <!-- Ejemplo 10: Cambiar estilos -->
+    <div class="ejemplo">
+      <h3>10. Cambiar Estilos</h3>
+      <h1>Título 1</h1>
+      <h1>Título 2</h1>
+    </div>
+
+    <!-- Ejemplo 11: Cambiar tamaño de fuente -->
+    <div class="ejemplo">
+      <h3>11. Cambiar Tamaño de Fuente</h3>
+      <p class="miParrafo">Párrafo 1</p>
+      <p class="miParrafo">Párrafo 2</p>
+    </div>
+
+    <!-- Ejemplo 12: Atributos personalizados -->
+    <div class="ejemplo">
+      <h3>12. Atributos Personalizados</h3>
+      <div id="contenedorAtributo" class="contenedor">Contenedor vacío</div>
+    </div>
+
+    <script src="ejemplos.js"></script>
+  </body>
+</html>
