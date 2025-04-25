@@ -1,0 +1,9 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 600">
+  <rect width="800" height="600" fill="#87CEEB"/>
+  <path d="M0,600 L800,600 L800,400 Q700,300 600,350 Q500,250 400,300 Q300,200 200,350 Q100,250 0,400 Z" fill="#2E8B57"/>
+  <circle cx="100" cy="300" r="40" fill="#228B22"/>
+  <circle cx="300" cy="250" r="50" fill="#228B22"/>
+  <circle cx="500" cy="300" r="45" fill="#228B22"/>
+  <circle cx="700" cy="280" r="55" fill="#228B22"/>
+  <text x="400" y="550" font-family="Arial" font-size="20" text-anchor="middle" fill="#000000">Bosque</text>
+</svg>

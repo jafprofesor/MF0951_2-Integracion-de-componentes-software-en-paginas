@@ -1,0 +1,35 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="800" height="500" viewBox="0 0 800 500">
+  <!-- Fondo de cielo -->
+  <rect width="800" height="500" fill="#E6E6FA"/>
+  
+  <!-- Suelo -->
+  <rect x="0" y="350" width="800" height="150" fill="#8B4513"/>
+  
+  <!-- Árbol 1 -->
+  <rect x="100" y="200" width="30" height="150" fill="#8B4513"/>
+  <ellipse cx="115" cy="180" rx="70" ry="90" fill="#FF8C00"/>
+  
+  <!-- Árbol 2 -->
+  <rect x="300" y="220" width="25" height="130" fill="#8B4513"/>
+  <ellipse cx="312" cy="200" rx="60" ry="80" fill="#FF4500"/>
+  
+  <!-- Árbol 3 -->
+  <rect x="500" y="180" width="35" height="170" fill="#8B4513"/>
+  <ellipse cx="517" cy="160" rx="80" ry="100" fill="#FFA500"/>
+  
+  <!-- Árbol 4 -->
+  <rect x="700" y="230" width="20" height="120" fill="#8B4513"/>
+  <ellipse cx="710" cy="210" rx="50" ry="70" fill="#CD853F"/>
+  
+  <!-- Hojas caídas -->
+  <circle cx="150" cy="400" r="10" fill="#FF4500"/>
+  <circle cx="200" cy="420" r="8" fill="#FF8C00"/>
+  <circle cx="250" cy="390" r="12" fill="#FFA500"/>
+  <circle cx="350" cy="410" r="9" fill="#FF4500"/>
+  <circle cx="450" cy="430" r="11" fill="#FF8C00"/>
+  <circle cx="550" cy="400" r="10" fill="#FFA500"/>
+  <circle cx="650" cy="420" r="8" fill="#FF4500"/>
+  
+  <!-- Texto descriptivo -->
+  <text x="400" y="50" font-family="Arial" font-size="24" text-anchor="middle" fill="#333">Bosque en otoño</text>
+</svg>

@@ -1,0 +1,6 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 600">
+  <rect width="800" height="600" fill="#87CEEB"/>
+  <path d="M0,600 L200,300 L400,450 L600,200 L800,600 Z" fill="#4A7C59"/>
+  <path d="M400,450 L500,350 L600,450 Z" fill="#FFFFFF"/>
+  <text x="400" y="550" font-family="Arial" font-size="20" text-anchor="middle" fill="#000000">Montaña</text>
+</svg>

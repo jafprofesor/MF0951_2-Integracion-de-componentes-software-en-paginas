@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Galería de Imágenes - Ejemplo Básico</title>
+    <link rel="stylesheet" href="css/estilos.css" />
+  </head>
+  <body>
+    <div class="contenedor">
+      <h1>Galería de Imágenes - Ejemplo Básico</h1>
+
+      <p class="descripcion">
+        Este es un ejemplo básico de una galería de imágenes implementada con
+        JavaScript simple. Permite navegar entre varias imágenes utilizando los
+        botones anterior y siguiente.
+      </p>
+
+      <!-- Contenedor principal de la galería -->
+      <div class="galeria">
+        <!-- Botón para ir a la imagen anterior -->
+        <button id="btn-anterior" class="btn-navegacion">
+          &#10094; Anterior
+        </button>
+
+        <!-- Contenedor de la imagen actual -->
+        <div class="contenedor-imagen">
+          <img id="imagen-actual" src="imagenes/imagen1.jpg" alt="Imagen 1" />
+          <p id="descripcion-imagen" class="descripcion-imagen">
+            Imagen 1: Paisaje montañoso
+          </p>
+        </div>
+
+        <!-- Botón para ir a la imagen siguiente -->
+        <button id="btn-siguiente" class="btn-navegacion">
+          Siguiente &#10095;
+        </button>
+      </div>
+
+      
+
+      <p>
+        <a href="../efectosEspecialesEnPaginasWeb-main/index.html" class="volver">Volver a la página principal</a>
+      </p>
+    </div>
+
+    <!-- Enlace al archivo JavaScript -->
+    <script src="js/galeria.js"></script>
+  </body>
+</html>

@@ -1,0 +1,66 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="800" height="500" viewBox="0 0 800 500">
+  <!-- Fondo de cielo con degradado de atardecer -->
+  <defs>
+    <linearGradient id="skyGradient" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#FF6347"/>
+      <stop offset="50%" stop-color="#FF8C00"/>
+      <stop offset="100%" stop-color="#4B0082"/>
+    </linearGradient>
+  </defs>
+  <rect width="800" height="500" fill="url(#skyGradient)"/>
+  
+  <!-- Sol/Luna -->
+  <circle cx="400" cy="120" r="60" fill="#FFA07A"/>
+  
+  <!-- Silueta de la ciudad -->
+  <!-- Edificio 1 -->
+  <rect x="50" y="250" width="80" height="250" fill="#000000"/>
+  <rect x="60" y="270" width="15" height="20" fill="#FFFF00"/>
+  <rect x="90" y="270" width="15" height="20" fill="#FFFF00"/>
+  <rect x="60" y="310" width="15" height="20" fill="#FFFF00"/>
+  <rect x="90" y="310" width="15" height="20" fill="#FFFF00"/>
+  
+  <!-- Edificio 2 -->
+  <rect x="150" y="200" width="100" height="300" fill="#000000"/>
+  <rect x="170" y="220" width="15" height="20" fill="#FFFF00"/>
+  <rect x="210" y="220" width="15" height="20" fill="#FFFF00"/>
+  <rect x="170" y="260" width="15" height="20" fill="#FFFF00"/>
+  <rect x="210" y="260" width="15" height="20" fill="#FFFF00"/>
+  <rect x="170" y="300" width="15" height="20" fill="#FFFF00"/>
+  <rect x="210" y="300" width="15" height="20" fill="#FFFF00"/>
+  
+  <!-- Edificio 3 (rascacielos) -->
+  <rect x="280" y="150" width="60" height="350" fill="#000000"/>
+  <rect x="290" y="170" width="10" height="15" fill="#FFFF00"/>
+  <rect x="320" y="170" width="10" height="15" fill="#FFFF00"/>
+  <rect x="290" y="200" width="10" height="15" fill="#FFFF00"/>
+  <rect x="320" y="200" width="10" height="15" fill="#FFFF00"/>
+  <rect x="290" y="230" width="10" height="15" fill="#FFFF00"/>
+  <rect x="320" y="230" width="10" height="15" fill="#FFFF00"/>
+  
+  <!-- Edificio 4 -->
+  <rect x="370" y="220" width="120" height="280" fill="#000000"/>
+  <rect x="390" y="240" width="15" height="20" fill="#FFFF00"/>
+  <rect x="430" y="240" width="15" height="20" fill="#FFFF00"/>
+  <rect x="390" y="280" width="15" height="20" fill="#FFFF00"/>
+  <rect x="430" y="280" width="15" height="20" fill="#FFFF00"/>
+  
+  <!-- Edificio 5 -->
+  <rect x="520" y="180" width="90" height="320" fill="#000000"/>
+  <rect x="535" y="200" width="15" height="20" fill="#FFFF00"/>
+  <rect x="575" y="200" width="15" height="20" fill="#FFFF00"/>
+  <rect x="535" y="240" width="15" height="20" fill="#FFFF00"/>
+  <rect x="575" y="240" width="15" height="20" fill="#FFFF00"/>
+  <rect x="535" y="280" width="15" height="20" fill="#FFFF00"/>
+  <rect x="575" y="280" width="15" height="20" fill="#FFFF00"/>
+  
+  <!-- Edificio 6 -->
+  <rect x="640" y="230" width="110" height="270" fill="#000000"/>
+  <rect x="660" y="250" width="15" height="20" fill="#FFFF00"/>
+  <rect x="700" y="250" width="15" height="20" fill="#FFFF00"/>
+  <rect x="660" y="290" width="15" height="20" fill="#FFFF00"/>
+  <rect x="700" y="290" width="15" height="20" fill="#FFFF00"/>
+  
+  <!-- Texto descriptivo -->
+  <text x="400" y="50" font-family="Arial" font-size="24" text-anchor="middle" fill="#FFFFFF">Ciudad al atardecer</text>
+</svg>
