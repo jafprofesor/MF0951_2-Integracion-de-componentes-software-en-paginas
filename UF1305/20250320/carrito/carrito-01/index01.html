@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Carrito de Compras</title>
+    <link rel="stylesheet" href="styles01.css" />
+  </head>
+  <body>
+    <div class="container">
+      <h1>Carrito de Compras</h1>
+      <div class="productos">
+        <div class="producto">
+          <h2>Artículo 1</h2>
+          <p>Precio: 10€</p>
+          <label for="cantidad1">Cantidad:</label>
+          <input type="number" id="cantidad1" min="0" value="0" />
+        </div>
+        <div class="producto">
+          <h2>Artículo 2</h2>
+          <p>Precio: 20€</p>
+          <label for="cantidad2">Cantidad:</label>
+          <input type="number" id="cantidad2" min="0" value="0" />
+        </div>
+        <div class="producto">
+          <h2>Artículo 3</h2>
+          <p>Precio: 30€</p>
+          <label for="cantidad3">Cantidad:</label>
+          <input type="number" id="cantidad3" min="0" value="0" />
+        </div>
+        <div class="producto">
+          <h2>Artículo 4</h2>
+          <p>Precio: 40€</p>
+          <label for="cantidad4">Cantidad:</label>
+          <input type="number" id="cantidad4" min="0" value="0" />
+        </div>
+        <div class="producto">
+          <h2>Artículo 5</h2>
+          <p>Precio: 50€</p>
+          <label for="cantidad5">Cantidad:</label>
+          <input type="number" id="cantidad5" min="0" value="0" />
+        </div>
+      </div>
+      <button onclick="calcularTotal()">Calcular Total</button>
+      <h2 id="total">Total: 0€</h2>
+    </div>
+    <script src ="carrito-dani-01.js"></script>
+    <!--<script src="script01.js"></script>-->
+  </body>
+</html>
