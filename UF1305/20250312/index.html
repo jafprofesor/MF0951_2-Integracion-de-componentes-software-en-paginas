@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ejemplos de Navegación DOM</title> 
+    <style>
+        .container {
+            margin: 20px;
+            padding: 20px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+        .example {
+            margin-bottom: 20px;
+            padding: 15px;
+            background-color: #f5f5f5;
+            border-radius: 4px;
+        }
+        .highlight {
+            background-color: yellow;
+        }
+        .mi-clase {
+            font-weight: bold;
+        }
+        .abuelo {
+            border: 2px solid blue;
+            padding: 10px;
+        }
+        .padre {
+            border: 2px solid green;
+            padding: 10px;
+            margin: 5px;
+        }
+    </style>
+</head>
+<body>
+    <h1>Ejemplos de Navegación DOM</h1>
+
+    <!-- Ejemplo 1: Padre e Hijo -->
+    <div class="container">
+        <h2>1. Obtener y Modificar el Padre</h2>
+        <div id="padre1">
+            <div id="hijo1">Hijo</div>
+        </div>
+    </div>
+
+    <!-- Ejemplo 2: Abuelo, Padre y Nieto -->
+    <div class="container">
+        <h2>2. Obtener Ancestro más Cercano</h2>
+        <div class="abuelo">
+            <div class="padre">
+                <div id="nieto">Nieto</div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Ejemplo 3: Contenedor con Múltiples Hijos -->
+    <div class="container">
+        <h2>3. Modificar Todos los Hijos</h2>
+        <div id="contenedor3">
+            <p>Hijo 1</p>
+            <p>Hijo 2</p>
+        </div>
+    </div>
+
+    <!-- Ejemplo 4: Primer y Último Hijo -->
+    <div class="container">
+        <h2>4. Modificar Primer y Último Hijo</h2>
+        <div id="contenedor4">
+            <p>Primer Hijo</p>
+            <p>Último Hijo</p>
+        </div>
+    </div>
+
+    <!-- Ejemplo 5: Hermanos -->
+    <div class="container">
+        <h2>5. Ocultar Hermanos</h2>
+        <div>Hermano Anterior</div>
+        <div id="elemento5">Elemento Central</div>
+        <div>Hermano Siguiente</div>
+    </div>
+
+    <!-- Ejemplo 6: Verificación de Selector -->
+    <div class="container">
+        <h2>6. Verificar Selector CSS</h2>
+        <div id="miElemento6" class="mi-clase">Elemento con Clase</div>
+        <div id="resultado6"></div>
+    </div>
+
+    <!-- Ejemplo 7: Verificación de Contención -->
+    <div class="container">
+        <h2>7. Verificar Contención de Elementos</h2>
+        <div id="contenedor7">
+            <div id="miElemento7">Elemento Contenido</div>
+        </div>
+        <div id="resultado7"></div>
+    </div>
+
+    <!-- Ejemplo 8: Agregar Nuevo Hijo -->
+    <div class="container">
+        <h2>8. Agregar Nuevo Hijo</h2>
+        <div id="contenedor8">
+            <p>Hijo 1</p>
+        </div>
+        <div id="resultado8"></div>
+    </div>
+
+    <!-- Ejemplo 9: Eliminar Primer Hijo -->
+    <div class="container">
+        <h2>9. Eliminar Primer Hijo</h2>
+        <div id="contenedor9">
+            <p>Hijo 1</p>
+            <p>Hijo 2</p>
+        </div>
+        <div id="resultado9"></div>
+    </div>
+
+    <!-- Ejemplo 10: Modificar Hermano Siguiente -->
+    <div class="container">
+        <h2>10. Modificar Hermano Siguiente</h2>
+        <div id="elemento10">Elemento</div>
+        <div>Hermano Siguiente</div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>

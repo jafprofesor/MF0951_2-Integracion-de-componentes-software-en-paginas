@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Navegación DOM</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div id="contenedor-principal" class="contenedor">
+        <div class="abuelo">
+            <div class="padre">
+                <div id="elemento-actual" class="elemento-actual">
+                    <p>Elemento Actual</p>
+                </div>
+                <div class="hermano">Hermano Siguiente</div>
+            </div>
+            <div class="padre">
+                <div class="hermano">Hermano en otro padre</div>
+            </div>
+        </div>
+    </div>
+
+    <div id="panel-info" class="panel">
+        <h2>Información de Navegación</h2>
+        <div id="info-navegacion"></div>
+    </div>
+
+    <!--Ocultamos script original<script src="script.js"></script>-->
+    <script src="script-empty.js"></script>
+</body>
+</html>

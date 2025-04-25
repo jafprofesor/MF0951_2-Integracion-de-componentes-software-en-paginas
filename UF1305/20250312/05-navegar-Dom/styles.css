@@ -1,0 +1,58 @@
+.contenedor {
+    max-width: 800px;
+    margin: 20px auto;
+    padding: 20px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+}
+
+.abuelo {
+    background-color: #f0f0f0;
+    padding: 15px;
+    margin-bottom: 20px;
+    border-radius: 4px;
+}
+
+.padre {
+    background-color: #e0e0e0;
+    padding: 15px;
+    margin: 10px 0;
+    border-radius: 4px;
+}
+
+.elemento-actual {
+    background-color: #4CAF50;
+    color: white;
+    padding: 10px;
+    margin: 10px 0;
+    border-radius: 4px;
+}
+
+.hermano {
+    background-color: #2196F3;
+    color: white;
+    padding: 10px;
+    margin: 10px 0;
+    border-radius: 4px;
+}
+
+.panel {
+    max-width: 800px;
+    margin: 20px auto;
+    padding: 20px;
+    background-color: #fff;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+}
+
+#info-navegacion {
+    margin-top: 10px;
+    padding: 10px;
+    background-color: #f8f8f8;
+    border-radius: 4px;
+}
+
+.highlight {
+    border: 2px solid #FF5722 !important;
+    box-shadow: 0 0 5px rgba(255, 87, 34, 0.5);
+}
