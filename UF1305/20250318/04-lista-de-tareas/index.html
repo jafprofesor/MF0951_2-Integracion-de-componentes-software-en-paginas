@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Lista de Tareas</title>
+    <link rel="stylesheet" href="styles.css" />
+    <!-- Enlace al archivo CSS para estilos -->
+  </head>
+  <body>
+    <div class="container">
+      <h1>Lista de Tareas</h1>
+      <!-- Título de la aplicación -->
+
+      <!-- Campo de entrada para añadir una nueva tarea -->
+      <input type="text" id="new-task" placeholder="Añadir nueva tarea" />
+
+      <!-- Campo de selección para elegir la prioridad de la tarea -->
+      <select id="priority">
+        <option value="low">Baja</option>
+        <option value="medium">Media</option>
+        <option value="high">Alta</option>
+      </select>
+
+      <!-- Campo de entrada para seleccionar la fecha de vencimiento de la tarea -->
+      <input type="date" id="due-date" />
+
+      <!-- Botón para añadir la tarea a la lista -->
+      <button id="add-task">Añadir</button>
+
+      <!-- Contenedor para los botones de filtro y ordenación -->
+      <div class="filters">
+        <!-- Botones para filtrar las tareas -->
+        <button id="all-filter">Todas</button>
+        <button id="completed-filter">Completadas</button>
+        <button id="pending-filter">Pendientes</button>
+
+        <!-- Botones para ordenar las tareas -->
+        <button id="sort-priority">Prioridad</button>
+        <button id="sort-due-date">Fecha de Vencimiento</button>
+      </div>
+
+      <!-- Lista desordenada donde se mostrarán las tareas -->
+      <ul id="task-list"></ul>
+    </div>
+    <script src="script.js"></script>
+    <!-- Enlace al archivo JavaScript para la lógica de la aplicación -->
+  </body>
+</html>
